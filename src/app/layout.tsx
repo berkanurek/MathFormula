@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { PostHogProvider } from "@/providers/PostHogProvider";
 import "katex/dist/katex.min.css";
 import "./globals.css";
 
@@ -31,7 +32,9 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-[100dvh] flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-        <ThemeProvider>{children}</ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );

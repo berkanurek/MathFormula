@@ -3,6 +3,7 @@
 import type { User } from "@supabase/supabase-js";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient as createSupabaseBrowserClient } from "@/lib/supabase/client";
+import posthog from "posthog-js";
 import { useEffect, useMemo, useState } from "react";
 
 export function useSupabaseSession() {
@@ -65,6 +66,16 @@ export function useSupabaseSession() {
     };
   }, [supabaseClient]);
 
+  useEffect(() => {
+    if (currentUser) {
+      posthog.identify(currentUser.id, {
+        email: currentUser.email ?? "",
+      });
+      return;
+    }
+    posthog.reset();
+  }, [currentUser]);
+
   const handleSignIn = async (email: string, password: string) => {
     if (!supabaseClient) {
       throw new Error("Supabase is not configured.");
@@ -93,6 +104,7 @@ export function useSupabaseSession() {
     }
     const { error } = await supabaseClient.auth.signOut();
     if (error) throw new Error(error.message);
+    posthog.reset();
   };
 
   return {
