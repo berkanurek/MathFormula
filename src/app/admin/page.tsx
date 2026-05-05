@@ -25,21 +25,26 @@ export default async function AdminPage() {
   const supabase = await createClient();
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  if (authError || !user || user.email?.toLowerCase() !== ADMIN_EMAIL) {
     redirect("/");
   }
 
-  if (user.email?.toLowerCase() !== ADMIN_EMAIL) {
-    redirect("/");
-  }
-
-  const [stats, users, activity] = await Promise.all([
+  const [statsResult, usersResult, activityResult] = await Promise.allSettled([
     getAdminOverviewStats(),
     getAdminRecentUsers(50),
     getAdminRecentActivity(50),
   ]);
+
+  const stats =
+    statsResult.status === "fulfilled"
+      ? statsResult.value
+      : { totalUsers: 0, formulasGeneratedToday: 0 };
+  const users = usersResult.status === "fulfilled" ? usersResult.value : [];
+  const activity =
+    activityResult.status === "fulfilled" ? activityResult.value : [];
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 md:px-6 lg:px-8">
