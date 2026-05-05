@@ -12,7 +12,7 @@
     "untitledFormula": "Nepojmenovaný vzorec"
   },
   "header": {
-    "brand": "FormulaConvert",
+    "brand": "MathFormula",
     "nav": {
       "liveEditor": "Živý editor",
       "myLibrary": "Moje knihovna",
@@ -53,7 +53,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2026 FormulaConvert. Pro akademickou excelenci.",
+    "copyright": "© 2026 MathFormula. Pro akademickou excelenci.",
     "privacy": "Ochrana soukromí",
     "terms": "Podmínky služby",
     "contactDeveloper": "Kontaktovat vývojáře",
@@ -61,12 +61,12 @@
   },
   "legal": {
     "privacy": {
-      "metaTitle": "Zásady ochrany osobních údajů — FormulaConvert",
-      "metaDescription": "Jak FormulaConvert (MathFormula) zpracovává a chrání vaše údaje.",
+      "metaTitle": "Zásady ochrany osobních údajů — MathFormula",
+      "metaDescription": "Jak MathFormula (MathFormula) zpracovává a chrání vaše údaje.",
       "lastUpdated": "Naposledy aktualizováno: květen 2026",
       "title": "Zásady ochrany osobních údajů pro MathFormula",
       "introductionTitle": "Úvod",
-      "introductionBody": "Vaše soukromí je pro nás důležité. Tyto zásady popisují, jak zpracováváme údaje uživatelů při používání MathFormula (FormulaConvert). Zavazujeme se chránit vaše soukromí a postupovat transparentně.",
+      "introductionBody": "Vaše soukromí je pro nás důležité. Tyto zásady popisují, jak zpracováváme údaje uživatelů při používání MathFormula (MathFormula). Zavazujeme se chránit vaše soukromí a postupovat transparentně.",
       "dataCollectionTitle": "Sběr údajů",
       "dataCollectionItem1": "E-mailové adresy shromažďujeme prostřednictvím Supabase při registraci nebo přihlášení – pro ověření identity a správu účtu.",
       "dataCollectionItem2": "Obrázky vzorců nahrávané ke skenování mohou být zpracovány přes rozhraní Google Gemini a OpenRouter. Můžeme také shromažďovat omezené technické údaje (např. typ prohlížeče) potřebné k provozu a zabezpečení služby.",
@@ -79,8 +79,8 @@
       "thirdPartyBody": "Vaše osobní údaje neprodáváme ani neobchodujeme s nimi za účelem marketingu. Poskytovatelé služeb (hosting, ověřování, AI API) zpracovávají údaje pouze v rozsahu nutném pro provoz produktu v souladu s těmito zásadami a svými podmínkami."
     },
     "terms": {
-      "metaTitle": "Podmínky služby — FormulaConvert",
-      "metaDescription": "Podmínky používání MathFormula (FormulaConvert) na mathformula.xyz.",
+      "metaTitle": "Podmínky služby — MathFormula",
+      "metaDescription": "Podmínky používání MathFormula (MathFormula) na mathformula.xyz.",
       "lastUpdated": "Naposledy aktualizováno: květen 2026",
       "title": "Podmínky služby",
       "acceptanceTitle": "Souhlas",
@@ -279,12 +279,12 @@
   },
   "howItWorks": {
     "meta": {
-      "title": "Jak to funguje — FormulaConvert",
-      "description": "Zjistěte, jak FormulaConvert převádí LaTeX na MathML pro Word."
+      "title": "Jak to funguje — MathFormula",
+      "description": "Zjistěte, jak MathFormula převádí LaTeX na MathML pro Word."
     },
     "badge": "Přehled",
     "title": "Jak to funguje",
-    "intro": "FormulaConvert mění LaTeX na MathML pro Word a drží vaše vzorce přehledně — pro studium, výzkum a technickou dokumentaci.",
+    "intro": "MathFormula mění LaTeX na MathML pro Word a drží vaše vzorce přehledně — pro studium, výzkum a technickou dokumentaci.",
     "stepLabel": "Krok {step}",
     "steps": {
       "1": {
@@ -306,7 +306,7 @@
   },
   "myLibraryPage": {
     "meta": {
-      "title": "Moje knihovna — FormulaConvert",
+      "title": "Moje knihovna — MathFormula",
       "description": "Vaše uložené vzorce LaTeX."
     },
     "badge": "Pracovní prostor",

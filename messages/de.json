@@ -12,7 +12,7 @@
     "untitledFormula": "Unbenannte Formel"
   },
   "header": {
-    "brand": "FormulaConvert",
+    "brand": "MathFormula",
     "nav": {
       "liveEditor": "Live-Editor",
       "myLibrary": "Meine Bibliothek",
@@ -53,7 +53,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2026 FormulaConvert. Für akademische Exzellenz gemacht.",
+    "copyright": "© 2026 MathFormula. Für akademische Exzellenz gemacht.",
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
     "contactDeveloper": "Entwickler kontaktieren",
@@ -61,12 +61,12 @@
   },
   "legal": {
     "privacy": {
-      "metaTitle": "Datenschutz — FormulaConvert",
-      "metaDescription": "Informationen zur Datenerhebung und zum Datenschutz bei FormulaConvert (MathFormula).",
+      "metaTitle": "Datenschutz — MathFormula",
+      "metaDescription": "Informationen zur Datenerhebung und zum Datenschutz bei MathFormula (MathFormula).",
       "lastUpdated": "Stand: Mai 2026",
       "title": "Datenschutzerklärung für MathFormula",
       "introductionTitle": "Einleitung",
-      "introductionBody": "Der Schutz Ihrer Privatsphäre ist uns wichtig. Diese Erklärung beschreibt, wie wir personenbezogene Daten bei der Nutzung von MathFormula (FormulaConvert) verarbeiten. Wir sind transparent und verpflichten uns zum verantwortungsvollen Umgang mit Ihren Daten.",
+      "introductionBody": "Der Schutz Ihrer Privatsphäre ist uns wichtig. Diese Erklärung beschreibt, wie wir personenbezogene Daten bei der Nutzung von MathFormula (MathFormula) verarbeiten. Wir sind transparent und verpflichten uns zum verantwortungsvollen Umgang mit Ihren Daten.",
       "dataCollectionTitle": "Datenerhebung",
       "dataCollectionItem1": "Wir erheben E-Mail-Adressen über Supabase, wenn Sie ein Konto anlegen oder sich anmelden – zur Authentifizierung und sicheren Kontoverwaltung.",
       "dataCollectionItem2": "Hochgeladene Formelbilder können zur Verarbeitung an die APIs von Google Gemini und OpenRouter übermittelt werden. Darüber hinaus können wir begrenzte technische Daten (z. B. Browsertyp) erheben, soweit dies für Betrieb und Sicherheit erforderlich ist.",
@@ -79,8 +79,8 @@
       "thirdPartyBody": "Wir verkaufen oder handeln Ihre personenbezogenen Daten nicht zu Marketingzwecken. Dienstleister (Hosting, Authentifizierung, KI-APIs) verarbeiten Daten nur soweit zur Bereitstellung des Produkts erforderlich, im Einklang mit dieser Erklärung und deren Bedingungen."
     },
     "terms": {
-      "metaTitle": "Nutzungsbedingungen — FormulaConvert",
-      "metaDescription": "Nutzungsbedingungen für MathFormula (FormulaConvert) unter mathformula.xyz.",
+      "metaTitle": "Nutzungsbedingungen — MathFormula",
+      "metaDescription": "Nutzungsbedingungen für MathFormula (MathFormula) unter mathformula.xyz.",
       "lastUpdated": "Stand: Mai 2026",
       "title": "Nutzungsbedingungen",
       "acceptanceTitle": "Annahme",
@@ -279,12 +279,12 @@
   },
   "howItWorks": {
     "meta": {
-      "title": "So funktioniert’s — FormulaConvert",
-      "description": "Erfahren Sie, wie FormulaConvert LaTeX in Word-taugliches MathML verwandelt."
+      "title": "So funktioniert’s — MathFormula",
+      "description": "Erfahren Sie, wie MathFormula LaTeX in Word-taugliches MathML verwandelt."
     },
     "badge": "Überblick",
     "title": "So funktioniert’s",
-    "intro": "FormulaConvert wandelt LaTeX in Word-taugliches MathML und organisiert Ihre Formeln — für Studium, Forschung und technische Texte.",
+    "intro": "MathFormula wandelt LaTeX in Word-taugliches MathML und organisiert Ihre Formeln — für Studium, Forschung und technische Texte.",
     "stepLabel": "Schritt {step}",
     "steps": {
       "1": {
@@ -306,7 +306,7 @@
   },
   "myLibraryPage": {
     "meta": {
-      "title": "Meine Bibliothek — FormulaConvert",
+      "title": "Meine Bibliothek — MathFormula",
       "description": "Ihre gespeicherten LaTeX-Formeln."
     },
     "badge": "Arbeitsbereich",

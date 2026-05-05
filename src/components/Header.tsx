@@ -4,10 +4,10 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { createClient as createSupabaseBrowserClient } from "@/lib/supabase/client";
-import { Languages, Loader2, Menu, X } from "lucide-react";
+import { Eye, EyeOff, Languages, Loader2, Menu, X } from "lucide-react";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { createPortal } from "react-dom";
 
 type AuthenticatedUser = {
@@ -102,7 +102,9 @@ export function Header({
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const langMenuRef = useRef<HTMLDivElement | null>(null);
+  const shouldCloseAuthOnBackdropClickRef = useRef(false);
 
   const supabaseClient = useMemo<SupabaseClient | null>(() => {
     if (typeof window === "undefined") return null;
@@ -118,8 +120,26 @@ export function Header({
   }, []);
 
   useEffect(() => {
-    if (!isAuthModalOpen) setIsGoogleLoading(false);
+    if (!isAuthModalOpen) {
+      setIsGoogleLoading(false);
+      setShowPassword(false);
+    }
   }, [isAuthModalOpen]);
+
+  const handleAuthBackdropMouseDown = (event: ReactMouseEvent<HTMLDivElement>) => {
+    shouldCloseAuthOnBackdropClickRef.current =
+      event.target === event.currentTarget;
+  };
+
+  const handleAuthBackdropClick = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (
+      shouldCloseAuthOnBackdropClickRef.current &&
+      event.target === event.currentTarget
+    ) {
+      setIsAuthModalOpen(false);
+    }
+    shouldCloseAuthOnBackdropClickRef.current = false;
+  };
 
   useEffect(() => {
     setIsMobileDrawerOpen(false);
@@ -518,7 +538,8 @@ export function Header({
       <div
         className="fixed inset-0 z-[130] flex items-center justify-center bg-black/40 px-4 dark:bg-black/60"
         role="presentation"
-        onClick={() => setIsAuthModalOpen(false)}
+        onMouseDown={handleAuthBackdropMouseDown}
+        onClick={handleAuthBackdropClick}
       >
         <div
           role="dialog"
@@ -570,17 +591,32 @@ export function Header({
               autoComplete="email"
               className="w-full rounded-DEFAULT border border-slate-200 bg-white px-3 py-2 font-body-sm text-body-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-60 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
             />
-            <input
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder={tCommon("password")}
-              disabled={isGoogleLoading}
-              autoComplete={
-                authMode === "sign-in" ? "current-password" : "new-password"
-              }
-              className="w-full rounded-DEFAULT border border-slate-200 bg-white px-3 py-2 font-body-sm text-body-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-60 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder={tCommon("password")}
+                disabled={isGoogleLoading}
+                autoComplete={
+                  authMode === "sign-in" ? "current-password" : "new-password"
+                }
+                className="w-full rounded-DEFAULT border border-slate-200 bg-white py-2 pl-3 pr-11 font-body-sm text-body-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-60 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
+              />
+              <button
+                type="button"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                onClick={() => setShowPassword((v) => !v)}
+                disabled={isGoogleLoading}
+                className="absolute inset-y-0 right-0 inline-flex w-10 items-center justify-center rounded-r-DEFAULT text-slate-500 transition-colors hover:text-primary disabled:opacity-60 dark:text-slate-400 dark:hover:text-primary"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" aria-hidden />
+                ) : (
+                  <Eye className="h-4 w-4" aria-hidden />
+                )}
+              </button>
+            </div>
           </div>
           <div className="mt-md flex items-center justify-end gap-sm">
             <button

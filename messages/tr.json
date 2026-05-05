@@ -12,7 +12,7 @@
     "untitledFormula": "Adsız formül"
   },
   "header": {
-    "brand": "FormulaConvert",
+    "brand": "MathFormula",
     "nav": {
       "liveEditor": "Canlı Editör",
       "myLibrary": "Kütüphanem",
@@ -53,7 +53,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2026 FormulaConvert. Akademik mükemmellik için.",
+    "copyright": "© 2026 MathFormula. Akademik mükemmellik için.",
     "privacy": "Gizlilik Politikası",
     "terms": "Kullanım Koşulları",
     "contactDeveloper": "Geliştiriciyle İletişime Geç",
@@ -61,12 +61,12 @@
   },
   "legal": {
     "privacy": {
-      "metaTitle": "Gizlilik Politikası — FormulaConvert",
-      "metaDescription": "FormulaConvert, MathFormula kullanırken verilerinizi nasıl topladığı, kullandığı ve koruduğu hakkında bilgi.",
+      "metaTitle": "Gizlilik Politikası — MathFormula",
+      "metaDescription": "MathFormula, MathFormula kullanırken verilerinizi nasıl topladığı, kullandığı ve koruduğu hakkında bilgi.",
       "lastUpdated": "Son güncelleme: Mayıs 2026",
       "title": "MathFormula Gizlilik Politikası",
       "introductionTitle": "Giriş",
-      "introductionBody": "Gizliliğinize önem veriyoruz. Bu politika, MathFormula (FormulaConvert) kullanırken kullanıcı verilerini nasıl işlediğimizi açıklar. Gizliliğinizi korumayı ve uygulamalarımızda şeffaflığı taahhüt ediyoruz.",
+      "introductionBody": "Gizliliğinize önem veriyoruz. Bu politika, MathFormula (MathFormula) kullanırken kullanıcı verilerini nasıl işlediğimizi açıklar. Gizliliğinizi korumayı ve uygulamalarımızda şeffaflığı taahhüt ediyoruz.",
       "dataCollectionTitle": "Veri toplama",
       "dataCollectionItem1": "Hesap oluşturduğunuzda veya giriş yaptığınızda kimlik doğrulama ve güvenli hesap yönetimi için Supabase üzerinden e-posta adresleri topluyoruz.",
       "dataCollectionItem2": "Formül taraması için yüklediğiniz görüntüler Google Gemini ve OpenRouter API’leri üzerinden işlenebilir. Hizmeti çalıştırmak ve korumak için sınırlı teknik bilgi (ör. tarayıcı veya cihaz türü) de toplanabilir.",
@@ -79,8 +79,8 @@
       "thirdPartyBody": "Kişisel bilgilerinizi pazarlama amacıyla satmıyor veya takas etmiyoruz. Hizmet sağlayıcılar (barındırma, kimlik doğrulama, yapay zeka API’leri) verileri yalnızca ürünü işletmek için gerektiği ölçüde ve bu politika ile kendi koşulları çerçevesinde işler."
     },
     "terms": {
-      "metaTitle": "Kullanım Koşulları — FormulaConvert",
-      "metaDescription": "mathformula.xyz adresindeki MathFormula (FormulaConvert) kullanımına ilişkin koşullar.",
+      "metaTitle": "Kullanım Koşulları — MathFormula",
+      "metaDescription": "mathformula.xyz adresindeki MathFormula (MathFormula) kullanımına ilişkin koşullar.",
       "lastUpdated": "Son güncelleme: Mayıs 2026",
       "title": "Kullanım Koşulları",
       "acceptanceTitle": "Kabul",
@@ -279,12 +279,12 @@
   },
   "howItWorks": {
     "meta": {
-      "title": "Nasıl çalışır — FormulaConvert",
-      "description": "FormulaConvert’in LaTeX’i Word için MathML’e nasıl dönüştürdüğünü öğrenin."
+      "title": "Nasıl çalışır — MathFormula",
+      "description": "MathFormula’in LaTeX’i Word için MathML’e nasıl dönüştürdüğünü öğrenin."
     },
     "badge": "Genel bakış",
     "title": "Nasıl çalışır",
-    "intro": "FormulaConvert LaTeX’i Word uyumlu MathML’e çevirir ve kişisel formüllerinizi düzenli tutar — ödev, araştırma ve teknik yazı için.",
+    "intro": "MathFormula LaTeX’i Word uyumlu MathML’e çevirir ve kişisel formüllerinizi düzenli tutar — ödev, araştırma ve teknik yazı için.",
     "stepLabel": "Adım {step}",
     "steps": {
       "1": {
@@ -306,7 +306,7 @@
   },
   "myLibraryPage": {
     "meta": {
-      "title": "Kütüphanem — FormulaConvert",
+      "title": "Kütüphanem — MathFormula",
       "description": "Kayıtlı LaTeX formülleriniz."
     },
     "badge": "Çalışma alanı",

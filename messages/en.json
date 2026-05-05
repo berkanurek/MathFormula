@@ -12,7 +12,7 @@
     "untitledFormula": "Untitled Formula"
   },
   "header": {
-    "brand": "FormulaConvert",
+    "brand": "MathFormula",
     "nav": {
       "liveEditor": "Live Editor",
       "myLibrary": "My Library",
@@ -53,7 +53,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2026 FormulaConvert. Built for academic excellence.",
+    "copyright": "© 2026 MathFormula. Built for academic excellence.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "contactDeveloper": "Contact Developer",
@@ -61,12 +61,12 @@
   },
   "legal": {
     "privacy": {
-      "metaTitle": "Privacy Policy — FormulaConvert",
-      "metaDescription": "How FormulaConvert collects, uses, and protects your data when you use MathFormula.",
+      "metaTitle": "Privacy Policy — MathFormula",
+      "metaDescription": "How MathFormula collects, uses, and protects your data when you use MathFormula.",
       "lastUpdated": "Last updated: May 2026",
       "title": "Privacy Policy for MathFormula",
       "introductionTitle": "Introduction",
-      "introductionBody": "We value your privacy. This policy explains how we handle user data when you use MathFormula (FormulaConvert). We are committed to protecting your privacy and being transparent about our practices.",
+      "introductionBody": "We value your privacy. This policy explains how we handle user data when you use MathFormula (MathFormula). We are committed to protecting your privacy and being transparent about our practices.",
       "dataCollectionTitle": "Data collection",
       "dataCollectionItem1": "We collect email addresses via Supabase when you create an account or sign in, for authentication and secure account management.",
       "dataCollectionItem2": "Images you upload for formula scanning may be processed through Google Gemini and OpenRouter APIs. We may also collect limited technical information (such as browser or device type) needed to run and protect the service.",
@@ -79,8 +79,8 @@
       "thirdPartyBody": "We do not sell or trade your personal information to outside parties for marketing. Service providers (hosting, authentication, AI APIs) process data only as needed to operate the product, in line with this policy and their terms."
     },
     "terms": {
-      "metaTitle": "Terms of Service — FormulaConvert",
-      "metaDescription": "Terms governing use of MathFormula (FormulaConvert) at mathformula.xyz.",
+      "metaTitle": "Terms of Service — MathFormula",
+      "metaDescription": "Terms governing use of MathFormula (MathFormula) at mathformula.xyz.",
       "lastUpdated": "Last updated: May 2026",
       "title": "Terms of Service",
       "acceptanceTitle": "Acceptance",
@@ -279,12 +279,12 @@
   },
   "howItWorks": {
     "meta": {
-      "title": "How it works — FormulaConvert",
-      "description": "Learn how FormulaConvert turns LaTeX into Word-ready MathML."
+      "title": "How it works — MathFormula",
+      "description": "Learn how MathFormula turns LaTeX into Word-ready MathML."
     },
     "badge": "Overview",
     "title": "How it works",
-    "intro": "FormulaConvert turns LaTeX into Word-ready MathML and keeps your personal formulas organized—built for coursework, research, and technical writing.",
+    "intro": "MathFormula turns LaTeX into Word-ready MathML and keeps your personal formulas organized—built for coursework, research, and technical writing.",
     "stepLabel": "Step {step}",
     "steps": {
       "1": {
@@ -306,7 +306,7 @@
   },
   "myLibraryPage": {
     "meta": {
-      "title": "My Library — FormulaConvert",
+      "title": "My Library — MathFormula",
       "description": "Your saved LaTeX formulas."
     },
     "badge": "Workspace",
