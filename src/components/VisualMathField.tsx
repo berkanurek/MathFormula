@@ -1,6 +1,7 @@
 "use client";
 
 import "@/lib/mathliveFonts";
+import { useIsNarrowViewport } from "@/hooks/useMatchMedia";
 import {
   forwardRef,
   useCallback,
@@ -24,6 +25,7 @@ type Props = {
 export const VisualMathField = forwardRef<MathfieldElement, Props>(
   function VisualMathField({ value, onChange, className, id }, ref) {
     const [mounted, setMounted] = useState(false);
+    const isNarrow = useIsNarrowViewport();
     const innerRef = useRef<MathfieldElement | null>(null);
     const setRefs = useCallback(
       (node: MathfieldElement | null) => {
@@ -75,7 +77,7 @@ export const VisualMathField = forwardRef<MathfieldElement, Props>(
         ref={setRefs}
         id={id}
         className={className}
-        math-virtual-keyboard-policy="auto"
+        math-virtual-keyboard-policy={isNarrow ? "manual" : "auto"}
       />
     );
   },

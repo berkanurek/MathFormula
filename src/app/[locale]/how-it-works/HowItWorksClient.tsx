@@ -22,7 +22,7 @@ export function HowItWorksClient() {
   } = useSupabaseSession();
 
   return (
-    <div className="flex min-h-screen flex-col font-body-md text-body-md">
+    <div className="flex min-h-[100dvh] flex-col font-body-md text-body-md">
       <Header
         currentUser={currentUser}
         onSignIn={handleSignIn}

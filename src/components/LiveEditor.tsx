@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { copyLatexAsWordMathML, renderLatexToHtmlAndMathml } from "@/lib/latex";
 import { evaluateLatexNumeric } from "@/lib/mathEvaluator";
+import { compressImageFileForOcr } from "@/lib/ocrImage";
 import {
   exportPreviewAsPdf,
   exportPreviewAsPngTransparent,
@@ -14,6 +15,7 @@ import {
 } from "@/lib/exportPreview";
 import { VisualMathField } from "@/components/VisualMathField";
 import { LatexSourceDisclosure } from "@/components/LatexSourceDisclosure";
+import { useIsNarrowViewport } from "@/hooks/useMatchMedia";
 
 const VK_DISMISS_BTN_ID = "mathformula-vk-dismiss";
 
@@ -130,6 +132,7 @@ export function LiveEditor({
   const ocrFileInputRef = useRef<HTMLInputElement | null>(null);
   const ocrDropZoneRef = useRef<HTMLDivElement | null>(null);
   const howToWrapRef = useRef<HTMLDivElement | null>(null);
+  const isNarrowViewport = useIsNarrowViewport();
 
   const rendered = useMemo(() => renderLatexToHtmlAndMathml(latex), [latex]);
 
@@ -261,48 +264,72 @@ export function LiveEditor({
     }
   }, [latex, onToast, tToast]);
 
-  const processOcr = useCallback(
+  const runOcrRequest = useCallback(
     async (imageBase64: string, mimeType: string) => {
-      setIsOcrModalOpen(false);
-      setIsOcrLoading(true);
+      const payload = normalizeOcrImageForApi(imageBase64, mimeType);
+      const res = await fetch("/api/ocr", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          imageBase64: payload.imageBase64,
+          mimeType: payload.mimeType,
+        }),
+      });
+
+      const rawText = await res.text();
+      let data: { latex?: string; error?: string };
       try {
-        const payload = normalizeOcrImageForApi(imageBase64, mimeType);
-        const res = await fetch("/api/ocr", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            imageBase64: payload.imageBase64,
-            mimeType: payload.mimeType,
-          }),
-        });
+        data = JSON.parse(rawText) as { latex?: string; error?: string };
+      } catch {
+        throw new Error(
+          !res.ok
+            ? `OCR failed (${res.status}): ${rawText.slice(0, 240)}`
+            : "Invalid JSON from OCR service.",
+        );
+      }
 
-        const rawText = await res.text();
-        let data: { latex?: string; error?: string };
-        try {
-          data = JSON.parse(rawText) as { latex?: string; error?: string };
-        } catch {
-          throw new Error(
-            !res.ok
-              ? `OCR failed (${res.status}): ${rawText.slice(0, 240)}`
-              : "Invalid JSON from OCR service.",
-          );
-        }
+      if (!res.ok) {
+        throw new Error(
+          data.error?.trim() ||
+            `${tToast("ocrRequestFailed")} (${res.status})`,
+        );
+      }
+      if (!data.latex?.trim()) {
+        throw new Error(tToast("ocrNoLatex"));
+      }
+      onLatexChange(data.latex.trim());
+      onOcrComplete?.();
+      onToast({
+        tone: "success",
+        message: tToast("ocrSuccess"),
+      });
+    },
+    [onLatexChange, onOcrComplete, onToast, tToast],
+  );
 
-        if (!res.ok) {
-          throw new Error(
-            data.error?.trim() ||
-              `${tToast("ocrRequestFailed")} (${res.status})`,
-          );
-        }
-        if (!data.latex?.trim()) {
-          throw new Error(tToast("ocrNoLatex"));
-        }
-        onLatexChange(data.latex.trim());
-        onOcrComplete?.();
+  const MAX_OCR_FILE_BYTES = 12 * 1024 * 1024;
+
+  const handleOcrImageFile = useCallback(
+    async (file: File) => {
+      if (!file.type.startsWith("image/")) {
         onToast({
-          tone: "success",
-          message: tToast("ocrSuccess"),
+          tone: "error",
+          message: tToast("ocrInvalidFile"),
         });
+        return;
+      }
+      if (file.size > MAX_OCR_FILE_BYTES) {
+        onToast({
+          tone: "error",
+          message: tToast("ocrTooLarge"),
+        });
+        return;
+      }
+      setIsOcrLoading(true);
+      setIsOcrModalOpen(false);
+      try {
+        const { dataUrl, mimeType } = await compressImageFileForOcr(file);
+        await runOcrRequest(dataUrl, mimeType);
       } catch (error) {
         onToast({
           tone: "error",
@@ -315,34 +342,7 @@ export function LiveEditor({
         setIsOcrLoading(false);
       }
     },
-    [onLatexChange, onOcrComplete, onToast, tToast],
-  );
-
-  const handleOcrImageFile = useCallback(
-    async (file: File) => {
-      if (!file.type.startsWith("image/")) {
-        onToast({
-          tone: "error",
-          message: tToast("ocrInvalidFile"),
-        });
-        return;
-      }
-      if (file.size > 4 * 1024 * 1024) {
-        onToast({
-          tone: "error",
-          message: tToast("ocrTooLarge"),
-        });
-        return;
-      }
-      const dataUrl = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = () => reject(new Error(tToast("fileReadFailed")));
-        reader.readAsDataURL(file);
-      });
-      await processOcr(dataUrl, file.type);
-    },
-    [onToast, processOcr, tToast],
+    [onToast, runOcrRequest, tToast],
   );
 
   useEffect(() => {
@@ -525,7 +525,7 @@ export function LiveEditor({
     >
       {isOcrLoading ? (
         <div
-          className="absolute inset-0 z-[110] flex flex-col items-center justify-center gap-md rounded-xl border border-slate-200/80 bg-white/90 p-gutter backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-950/92"
+          className="fixed inset-0 z-[250] flex flex-col items-center justify-center gap-md border border-slate-200/60 bg-white/92 p-gutter backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-950/94"
           role="status"
           aria-live="polite"
           aria-busy="true"
@@ -549,7 +549,7 @@ export function LiveEditor({
         className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-slate-200/90 bg-slate-50 shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_8px_40px_rgb(0,0,0,0.35)]"
         aria-label={t("ariaWorkspace")}
       >
-        <header className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/90 px-4 py-3 dark:border-slate-800 md:gap-sm md:px-gutter md:py-md">
+        <header className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/90 px-3 py-3 dark:border-slate-800 sm:px-4 md:gap-sm md:px-gutter md:py-md">
           <div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:gap-md">
             <div
               className="flex min-w-0 items-start gap-1.5 sm:items-center"
@@ -561,7 +561,7 @@ export function LiveEditor({
               <div className="relative shrink-0 pt-0.5 sm:pt-0">
                 <button
                   type="button"
-                  className="inline-flex min-h-[40px] min-w-[40px] items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-primary focus-visible:outline focus-visible:ring-2 focus-visible:ring-primary dark:text-slate-400 dark:hover:bg-slate-800"
+                  className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-primary focus-visible:outline focus-visible:ring-2 focus-visible:ring-primary dark:text-slate-400 dark:hover:bg-slate-800"
                   aria-expanded={isHowToOpen}
                   aria-label={t("howToUseAria")}
                   onClick={() => setIsHowToOpen((o) => !o)}
@@ -637,14 +637,21 @@ export function LiveEditor({
           </div>
         </header>
 
-        <div className="flex min-h-0 flex-1 flex-col space-y-md px-4 pb-md pt-4 md:px-gutter md:pt-lg">
-          <VisualMathField
-            ref={mathFieldRef}
-            id="latex-input"
-            value={latex}
-            onChange={onLatexChange}
-            className="visual-math-field min-h-[300px] w-full flex-1 rounded-lg border border-slate-200/90 bg-white p-md text-body-md leading-relaxed text-slate-900 shadow-inner focus-within:border-primary focus-within:ring-2 focus-within:ring-primary dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 sm:min-h-[380px] sm:p-lg lg:min-h-[420px]"
-          />
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col space-y-md px-3 pb-md pt-4 sm:px-4 md:px-gutter md:pt-lg">
+          {isNarrowViewport ? (
+            <p className="m-0 font-body-sm text-body-sm text-slate-600 dark:text-slate-400">
+              {t("mobileKeyboardHint")}
+            </p>
+          ) : null}
+          <div className="min-w-0 max-w-full overflow-x-auto">
+            <VisualMathField
+              ref={mathFieldRef}
+              id="latex-input"
+              value={latex}
+              onChange={onLatexChange}
+              className="visual-math-field min-h-[300px] w-full min-w-0 flex-1 rounded-lg border border-slate-200/90 bg-white p-md text-body-md leading-relaxed text-slate-900 shadow-inner focus-within:border-primary focus-within:ring-2 focus-within:ring-primary dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 sm:min-h-[380px] sm:p-lg lg:min-h-[420px]"
+            />
+          </div>
           <LatexSourceDisclosure
             latex={latex}
             onCopy={async () => {
@@ -695,7 +702,7 @@ export function LiveEditor({
           ) : null}
         </div>
 
-        <footer className="mt-auto shrink-0 border-t border-slate-200/90 bg-white/70 px-4 py-md dark:border-slate-800 dark:bg-slate-950/50 md:px-gutter md:py-lg">
+        <footer className="mt-auto shrink-0 border-t border-slate-200/90 bg-white/70 px-3 py-md dark:border-slate-800 dark:bg-slate-950/50 sm:px-4 md:px-gutter md:py-lg">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-sm">
             <button
               type="button"
@@ -945,6 +952,7 @@ export function LiveEditor({
               ref={ocrFileInputRef}
               type="file"
               accept="image/*"
+              capture="environment"
               className="sr-only"
               tabIndex={-1}
               onChange={(e) => {
