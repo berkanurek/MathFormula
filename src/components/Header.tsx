@@ -213,7 +213,7 @@ export function Header({
   );
 
   const desktopAuth = currentUser ? (
-    <div className="relative">
+    <div className="relative md:overflow-visible">
       <button
         type="button"
         onClick={() => setIsAccountMenuOpen((open) => !open)}
@@ -223,8 +223,11 @@ export function Header({
         {userInitial}
       </button>
       {isAccountMenuOpen ? (
-        <div className="absolute right-0 z-50 mt-2 w-52 rounded-lg border border-slate-200 bg-white p-sm shadow-sm dark:border-slate-700 dark:bg-slate-900">
-          <p className="truncate font-body-sm text-body-sm text-slate-600 dark:text-slate-400">
+        <div
+          className="absolute right-0 z-50 mt-2 min-w-[220px] w-max max-w-[min(18rem,calc(100vw-2rem))] overflow-visible rounded-lg border border-slate-200 bg-white p-sm shadow-md md:max-h-none md:overflow-y-visible dark:border-slate-700 dark:bg-slate-900"
+          role="menu"
+        >
+          <p className="break-words text-left font-body-sm text-body-sm leading-snug text-slate-600 dark:text-slate-400">
             {currentUser.email}
           </p>
           <button
@@ -492,7 +495,7 @@ export function Header({
   return (
     <>
       <header className="sticky top-0 z-[100] w-full border-b border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
-        <div className="relative mx-auto flex h-16 max-w-7xl min-w-0 items-center justify-between gap-3 overflow-x-hidden px-4 md:h-20 md:px-8">
+        <div className="relative mx-auto flex h-16 max-w-7xl min-w-0 items-center justify-between gap-3 overflow-x-clip px-4 md:h-20 md:px-8">
           <div className="flex min-w-0 shrink-0 items-center">
             <Link
               href="/"
