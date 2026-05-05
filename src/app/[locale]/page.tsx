@@ -61,7 +61,7 @@ export default function Home() {
         onSignOut={handleSignOut}
         onToast={showToast}
       />
-      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-lg px-3 py-lg sm:px-4 md:px-6 lg:px-8">
+      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-lg px-4 py-lg md:px-6 lg:px-8">
         <div className="flex flex-col gap-sm">
           <h1 className="font-h1 text-h1 text-slate-900 dark:text-slate-100">
             {t("hero.title")}

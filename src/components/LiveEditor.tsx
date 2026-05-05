@@ -549,7 +549,7 @@ export function LiveEditor({
         className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-slate-200/90 bg-slate-50 shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_8px_40px_rgb(0,0,0,0.35)]"
         aria-label={t("ariaWorkspace")}
       >
-        <header className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/90 px-3 py-3 dark:border-slate-800 sm:px-4 md:gap-sm md:px-gutter md:py-md">
+        <header className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/90 px-4 py-3 dark:border-slate-800 md:gap-sm md:px-gutter md:py-md">
           <div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:gap-md">
             <div
               className="flex min-w-0 items-start gap-1.5 sm:items-center"
@@ -637,7 +637,7 @@ export function LiveEditor({
           </div>
         </header>
 
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col space-y-md px-3 pb-md pt-4 sm:px-4 md:px-gutter md:pt-lg">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col space-y-md px-4 pb-md pt-4 md:px-gutter md:pt-lg">
           {isNarrowViewport ? (
             <p className="m-0 font-body-sm text-body-sm text-slate-600 dark:text-slate-400">
               {t("mobileKeyboardHint")}
@@ -702,7 +702,7 @@ export function LiveEditor({
           ) : null}
         </div>
 
-        <footer className="mt-auto shrink-0 border-t border-slate-200/90 bg-white/70 px-3 py-md dark:border-slate-800 dark:bg-slate-950/50 sm:px-4 md:px-gutter md:py-lg">
+        <footer className="mt-auto shrink-0 border-t border-slate-200/90 bg-white/70 px-4 py-md dark:border-slate-800 md:px-gutter md:py-lg">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-sm">
             <button
               type="button"
@@ -952,7 +952,6 @@ export function LiveEditor({
               ref={ocrFileInputRef}
               type="file"
               accept="image/*"
-              capture="environment"
               className="sr-only"
               tabIndex={-1}
               onChange={(e) => {

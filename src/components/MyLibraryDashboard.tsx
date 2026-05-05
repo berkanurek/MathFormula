@@ -117,7 +117,7 @@ export function MyLibraryDashboard({
         onSignOut={handleSignOut}
         onToast={showToast}
       />
-      <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-lg flex flex-col gap-lg">
+      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-lg px-4 py-lg md:px-6">
         <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div className="pointer-events-none absolute -top-24 right-0 h-48 w-48 rounded-full bg-primary/10 blur-3xl dark:bg-primary/15" />
           <div className="pointer-events-none absolute -bottom-16 left-10 h-40 w-40 rounded-full bg-indigo-200/40 blur-3xl dark:bg-indigo-900/30" />

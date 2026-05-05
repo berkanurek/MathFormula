@@ -18,6 +18,10 @@
       "myLibrary": "Meine Bibliothek",
       "howItWorks": "So funktioniert’s"
     },
+    "openMainMenu": "Menü öffnen",
+    "closeMainMenu": "Menü schließen",
+    "menuNavAria": "Navigation und Einstellungen",
+    "appearance": "Design",
     "accountMenu": "Kontomenü",
     "signIn": "Anmelden",
     "signUp": "Registrieren",

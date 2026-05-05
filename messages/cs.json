@@ -18,6 +18,10 @@
       "myLibrary": "Moje knihovna",
       "howItWorks": "Jak to funguje"
     },
+    "openMainMenu": "Otevřít nabídku",
+    "closeMainMenu": "Zavřít nabídku",
+    "menuNavAria": "Navigace a nastavení",
+    "appearance": "Vzhled",
     "accountMenu": "Menu účtu",
     "signIn": "Přihlásit se",
     "signUp": "Registrace",

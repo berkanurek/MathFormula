@@ -18,6 +18,10 @@
       "myLibrary": "My Library",
       "howItWorks": "How it works"
     },
+    "openMainMenu": "Open menu",
+    "closeMainMenu": "Close menu",
+    "menuNavAria": "Site navigation and settings",
+    "appearance": "Theme",
     "accountMenu": "Account menu",
     "signIn": "Sign In",
     "signUp": "Sign Up",
