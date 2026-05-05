@@ -44,15 +44,53 @@
       "label": "Sprache",
       "en": "English",
       "de": "Deutsch",
-      "cs": "Čeština"
+      "cs": "Čeština",
+      "tr": "Türkçe"
     }
   },
   "footer": {
     "copyright": "© 2026 FormulaConvert. Für akademische Exzellenz gemacht.",
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
-    "contact": "Support kontaktieren",
-    "docs": "Dokumentation"
+    "contactDeveloper": "Entwickler kontaktieren",
+    "signatureRich": "Entwickelt von <b>Berkan Urek</b> für <b>Simal Naz</b>."
+  },
+  "legal": {
+    "privacy": {
+      "metaTitle": "Datenschutz — FormulaConvert",
+      "metaDescription": "Informationen zur Datenerhebung und zum Datenschutz bei FormulaConvert (MathFormula).",
+      "lastUpdated": "Stand: Mai 2026",
+      "title": "Datenschutzerklärung für MathFormula",
+      "introductionTitle": "Einleitung",
+      "introductionBody": "Der Schutz Ihrer Privatsphäre ist uns wichtig. Diese Erklärung beschreibt, wie wir personenbezogene Daten bei der Nutzung von MathFormula (FormulaConvert) verarbeiten. Wir sind transparent und verpflichten uns zum verantwortungsvollen Umgang mit Ihren Daten.",
+      "dataCollectionTitle": "Datenerhebung",
+      "dataCollectionItem1": "Wir erheben E-Mail-Adressen über Supabase, wenn Sie ein Konto anlegen oder sich anmelden – zur Authentifizierung und sicheren Kontoverwaltung.",
+      "dataCollectionItem2": "Hochgeladene Formelbilder können zur Verarbeitung an die APIs von Google Gemini und OpenRouter übermittelt werden. Darüber hinaus können wir begrenzte technische Daten (z. B. Browsertyp) erheben, soweit dies für Betrieb und Sicherheit erforderlich ist.",
+      "imageProcessingTitle": "Verarbeitung von Bildern",
+      "imageProcessingLead": "Hochgeladene Bilder werden in Echtzeit über die APIs von Google Gemini und OpenRouter verarbeitet.",
+      "imageProcessingEmphasis": "Wir speichern Ihre Originalbilder nicht auf unseren Servern, es sei denn, Sie speichern sie in Ihrer persönlichen Bibliothek.",
+      "dataSecurityTitle": "Datensicherheit",
+      "dataSecurityBody": "Wir setzen branchenübliche Sicherheitsmaßnahmen und Verschlüsselung unserer Infrastrukturpartner ein, darunter Vercel (Hosting) und Supabase (Authentifizierung und Datenbank), um Daten bei Übertragung und Speicherung zu schützen.",
+      "thirdPartyTitle": "Weitergabe an Dritte",
+      "thirdPartyBody": "Wir verkaufen oder handeln Ihre personenbezogenen Daten nicht zu Marketingzwecken. Dienstleister (Hosting, Authentifizierung, KI-APIs) verarbeiten Daten nur soweit zur Bereitstellung des Produkts erforderlich, im Einklang mit dieser Erklärung und deren Bedingungen."
+    },
+    "terms": {
+      "metaTitle": "Nutzungsbedingungen — FormulaConvert",
+      "metaDescription": "Nutzungsbedingungen für MathFormula (FormulaConvert) unter mathformula.xyz.",
+      "lastUpdated": "Stand: Mai 2026",
+      "title": "Nutzungsbedingungen",
+      "acceptanceTitle": "Annahme",
+      "acceptanceBody": "Durch den Zugriff auf oder die Nutzung von MathFormula unter mathformula.xyz (der „Dienst“) erklären Sie sich mit diesen Nutzungsbedingungen einverstanden. Wenn Sie nicht einverstanden sind, nutzen Sie den Dienst nicht.",
+      "accuracyTitle": "Haftungsausschluss zur Genauigkeit",
+      "accuracyLead": "MathFormula ist ein KI-gestütztes Tool. Ergebnisse werden „wie besehen“ bereitgestellt. KI kann Fehler liefern – bitte prüfen Sie Ergebnisse eigenständig.",
+      "accuracyBody": "Der Entwickler (Berkan Urek) übernimmt keine Garantie für vollständige mathematische Richtigkeit. Bitte verifizieren Sie Ergebnisse eigenständig, bevor Sie sich für akademische, berufliche oder finanzielle Entscheidungen darauf verlassen.",
+      "userConductTitle": "Pflichten der Nutzer",
+      "userConductIntro": "Sie verpflichten sich zur ordnungsgemäßen Nutzung. Insbesondere gilt:",
+      "userConductItem1": "Sie dürfen keine schädlichen Dateien hochladen und keine Störungen oder Angriffe auf unsere Systeme unternehmen.",
+      "userConductItem2": "Sie dürfen keine urheberrechtlich geschützten oder sonstigen Inhalte ohne Berechtigung hochladen, wenn dies gegen geltendes Recht oder Rechte Dritter verstößt.",
+      "liabilityTitle": "Haftungsbeschränkung",
+      "liabilityBody": "Der Dienst richtet sich an Bildungs- und allgemeine Zwecke; es wird keine fachliche Gewähr übernommen. Im gesetzlich zulässigen Umfang haftet der Entwickler nicht für akademische, finanzielle oder sonstige Schäden aus der Nutzung oder dem Vertrauen auf den Dienst, einschließlich Fehler oder Auslassungen in KI- oder Rechenergebnissen."
+    }
   },
   "home": {
     "hero": {

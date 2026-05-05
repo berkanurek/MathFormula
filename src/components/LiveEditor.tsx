@@ -514,8 +514,13 @@ export function LiveEditor({
   const primaryBtnClass =
     "flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-DEFAULT px-2 py-3 font-h3 text-[13px] font-semibold leading-snug shadow-sm transition-colors break-words disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-[48px] sm:gap-2 sm:px-lg sm:text-base md:text-h3";
 
+  /** Unified secondary actions (Save, Calculate, Scan) — matches dark panel */
+  const secondaryActionBtnClass = `${primaryBtnClass} border border-slate-200 bg-white text-slate-900 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700`;
+
   const iconHitClass =
     "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg transition-colors";
+
+  const exportIconBtnClass = `${iconHitClass} shrink-0 border border-transparent text-slate-600 hover:border-slate-200 hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-primary`;
 
   return (
     <div
@@ -702,7 +707,7 @@ export function LiveEditor({
           ) : null}
         </div>
 
-        <footer className="mt-auto shrink-0 border-t border-slate-200/90 bg-white/70 px-4 py-md dark:border-slate-800 md:px-gutter md:py-lg">
+        <footer className="mt-auto shrink-0 border-t border-slate-200/90 bg-slate-50/95 px-4 py-md dark:border-slate-800 dark:bg-slate-950 md:px-gutter md:py-lg">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-sm">
             <button
               type="button"
@@ -737,7 +742,7 @@ export function LiveEditor({
             <button
               type="button"
               disabled={uiBusy}
-              className={`${primaryBtnClass} border border-slate-200 bg-white text-slate-900 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800`}
+              className={secondaryActionBtnClass}
               onClick={() => {
                 if (!currentUserId) {
                   onToast({
@@ -757,11 +762,11 @@ export function LiveEditor({
               aria-label={t("calculateAria")}
               title={t("calculateAria")}
               disabled={!canCalculate || uiBusy}
-              className={`${primaryBtnClass} border border-slate-200 bg-white text-slate-900 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800`}
+              className={secondaryActionBtnClass}
               onClick={handleCalculate}
             >
               <Calculator
-                className="size-[22px] shrink-0 text-primary"
+                className="size-[22px] shrink-0 text-slate-700 dark:text-slate-200"
                 aria-hidden
               />
               {t("calculate")}
@@ -770,7 +775,7 @@ export function LiveEditor({
               type="button"
               title={t("scanImageHint")}
               disabled={uiBusy}
-              className={`${primaryBtnClass} border border-primary/35 bg-primary/5 text-primary hover:border-primary/55 hover:bg-primary/10 dark:border-primary/45 dark:bg-primary/10 dark:hover:bg-primary/15`}
+              className={secondaryActionBtnClass}
               onClick={() => setIsOcrModalOpen(true)}
             >
               <span className="material-symbols-outlined text-[22px]">
@@ -781,7 +786,7 @@ export function LiveEditor({
           </div>
 
           <div className="mt-md flex flex-col items-stretch border-t border-slate-200/80 pt-md dark:border-slate-700/80 sm:mt-lg sm:pt-lg">
-            <span className="mb-2 hidden text-center font-label-caps text-[10px] uppercase tracking-wider text-slate-400 dark:text-slate-500 sm:mb-0 sm:block">
+            <span className="mb-2 hidden text-center font-label-caps text-[10px] uppercase tracking-wider text-slate-600 dark:text-slate-400 sm:mb-0 sm:block">
               {t("export.section")}
             </span>
             <div className="-mx-1 flex max-w-full flex-nowrap items-center justify-center gap-1 overflow-x-auto overflow-y-hidden px-1 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
@@ -790,7 +795,7 @@ export function LiveEditor({
                 aria-label={tExp("svgAria")}
                 title={tExp("svgTitle")}
                 disabled={!canExportVisual || isExporting || uiBusy}
-                className={`${iconHitClass} shrink-0 border border-transparent text-slate-500 hover:border-slate-200 hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 dark:hover:border-slate-700 dark:hover:bg-slate-900`}
+                className={exportIconBtnClass}
                 onClick={() =>
                   void runExport("SVG", (el) => exportPreviewAsSvg(el))
                 }
@@ -804,7 +809,7 @@ export function LiveEditor({
                 aria-label={tExp("pngAria")}
                 title={tExp("pngTitle")}
                 disabled={!canExportVisual || isExporting || uiBusy}
-                className={`${iconHitClass} shrink-0 border border-transparent text-slate-500 hover:border-slate-200 hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 dark:hover:border-slate-700 dark:hover:bg-slate-900`}
+                className={exportIconBtnClass}
                 onClick={() =>
                   void runExport("PNG", (el) =>
                     exportPreviewAsPngTransparent(el),
@@ -820,7 +825,7 @@ export function LiveEditor({
                 aria-label={tExp("pdfAria")}
                 title={tExp("pdfTitle")}
                 disabled={!canExportVisual || isExporting || uiBusy}
-                className={`${iconHitClass} shrink-0 border border-transparent text-slate-500 hover:border-slate-200 hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 dark:hover:border-slate-700 dark:hover:bg-slate-900`}
+                className={exportIconBtnClass}
                 onClick={() =>
                   void runExport("PDF", (el) => exportPreviewAsPdf(el))
                 }
@@ -834,7 +839,7 @@ export function LiveEditor({
                 aria-label={tExp("copyRawAria")}
                 title={tExp("copyRawTitle")}
                 disabled={!canCopyRawLatex || uiBusy}
-                className={`${iconHitClass} shrink-0 border border-transparent text-slate-500 hover:border-slate-200 hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 dark:hover:border-slate-700 dark:hover:bg-slate-900`}
+                className={exportIconBtnClass}
                 onClick={async () => {
                   try {
                     await navigator.clipboard.writeText(latex);
@@ -857,7 +862,7 @@ export function LiveEditor({
             </div>
           </div>
 
-          <p className="mt-md text-center font-body-sm text-body-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-md text-center font-body-sm text-body-sm text-slate-600 dark:text-slate-300">
             {t("footnote")}
           </p>
         </footer>

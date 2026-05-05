@@ -1,0 +1,339 @@
+{
+  "metadata": {
+    "title": "MathFormula",
+    "description": "LaTeX'ten Word'e formül dönüştürücü ve kütüphane"
+  },
+  "common": {
+    "cancel": "İptal",
+    "email": "E-posta",
+    "password": "Şifre",
+    "saving": "Kaydediliyor...",
+    "save": "Kaydet",
+    "untitledFormula": "Adsız formül"
+  },
+  "header": {
+    "brand": "FormulaConvert",
+    "nav": {
+      "liveEditor": "Canlı Editör",
+      "myLibrary": "Kütüphanem",
+      "howItWorks": "Nasıl çalışır"
+    },
+    "openMainMenu": "Menüyü aç",
+    "closeMainMenu": "Menüyü kapat",
+    "menuNavAria": "Site navigasyonu ve ayarlar",
+    "appearance": "Tema",
+    "accountMenu": "Hesap menüsü",
+    "signIn": "Giriş yap",
+    "signUp": "Kayıt ol",
+    "signOut": "Çıkış yap",
+    "auth": {
+      "signInTitle": "Giriş yap",
+      "signUpTitle": "Kayıt ol",
+      "signInSubmit": "Giriş yap",
+      "signUpSubmit": "Kayıt ol"
+    },
+    "toast": {
+      "emailPasswordRequired": "E-posta ve şifre gereklidir.",
+      "signedIn": "Başarıyla giriş yapıldı.",
+      "signUpSuccess": "Kayıt başarılı. E-posta doğrulamanızı kontrol edin.",
+      "authFailed": "Kimlik doğrulama başarısız.",
+      "signedOut": "Çıkış yapıldı.",
+      "signOutFailed": "Çıkış başarısız."
+    },
+    "language": {
+      "label": "Dil",
+      "en": "English",
+      "de": "Deutsch",
+      "cs": "Čeština",
+      "tr": "Türkçe"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 FormulaConvert. Akademik mükemmellik için.",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Koşulları",
+    "contactDeveloper": "Geliştiriciyle İletişime Geç",
+    "signatureRich": "<b>Berkan Urek</b> tarafından <b>Simal Naz</b> için geliştirildi."
+  },
+  "legal": {
+    "privacy": {
+      "metaTitle": "Gizlilik Politikası — FormulaConvert",
+      "metaDescription": "FormulaConvert, MathFormula kullanırken verilerinizi nasıl topladığı, kullandığı ve koruduğu hakkında bilgi.",
+      "lastUpdated": "Son güncelleme: Mayıs 2026",
+      "title": "MathFormula Gizlilik Politikası",
+      "introductionTitle": "Giriş",
+      "introductionBody": "Gizliliğinize önem veriyoruz. Bu politika, MathFormula (FormulaConvert) kullanırken kullanıcı verilerini nasıl işlediğimizi açıklar. Gizliliğinizi korumayı ve uygulamalarımızda şeffaflığı taahhüt ediyoruz.",
+      "dataCollectionTitle": "Veri toplama",
+      "dataCollectionItem1": "Hesap oluşturduğunuzda veya giriş yaptığınızda kimlik doğrulama ve güvenli hesap yönetimi için Supabase üzerinden e-posta adresleri topluyoruz.",
+      "dataCollectionItem2": "Formül taraması için yüklediğiniz görüntüler Google Gemini ve OpenRouter API’leri üzerinden işlenebilir. Hizmeti çalıştırmak ve korumak için sınırlı teknik bilgi (ör. tarayıcı veya cihaz türü) de toplanabilir.",
+      "imageProcessingTitle": "Görsel işleme",
+      "imageProcessingLead": "Yüklenen görüntüler Google Gemini ve OpenRouter API’leri kullanılarak gerçek zamanlı işlenir.",
+      "imageProcessingEmphasis": "Kişisel Kitaplığınıza kaydetmediğiniz sürece orijinal görüntülerinizi sunucularımızda saklamıyoruz.",
+      "dataSecurityTitle": "Veri güvenliği",
+      "dataSecurityBody": "Verilerin iletimde ve depoda korunması için Vercel (barındırma) ve Supabase (kimlik doğrulama ve veritabanı) dahil altyapı ortaklarımızın sağladığı endüstri standardı güvenlik ve şifrelemeyi kullanıyoruz.",
+      "thirdPartyTitle": "Üçüncü taraflara ifşa",
+      "thirdPartyBody": "Kişisel bilgilerinizi pazarlama amacıyla satmıyor veya takas etmiyoruz. Hizmet sağlayıcılar (barındırma, kimlik doğrulama, yapay zeka API’leri) verileri yalnızca ürünü işletmek için gerektiği ölçüde ve bu politika ile kendi koşulları çerçevesinde işler."
+    },
+    "terms": {
+      "metaTitle": "Kullanım Koşulları — FormulaConvert",
+      "metaDescription": "mathformula.xyz adresindeki MathFormula (FormulaConvert) kullanımına ilişkin koşullar.",
+      "lastUpdated": "Son güncelleme: Mayıs 2026",
+      "title": "Kullanım Koşulları",
+      "acceptanceTitle": "Kabul",
+      "acceptanceBody": "MathFormula’ya mathformula.xyz üzerinden erişerek veya kullanarak (“Hizmet”) bu Kullanım Koşullarını kabul etmiş olursunuz. Kabul etmiyorsanız Hizmeti kullanmayın.",
+      "accuracyTitle": "Doğruluk uyarısı",
+      "accuracyLead": "MathFormula yapay zeka destekli bir araçtır. Sonuçlar olduğu gibi sunulur. Yapay zeka hata yapabilir — sonuçları lütfen bağımsız olarak doğrulayın.",
+      "accuracyBody": "Geliştirici (Berkan Urek) matematiksel hesaplama veya yorumlarda %100 doğruluk garantisi vermez. Akademik, mesleki veya mali kararlarda güvenmeden önce sonuçları kendi başınıza doğrulayın.",
+      "userConductTitle": "Kullanıcı davranışı",
+      "userConductIntro": "Hizmeti kötüye kullanmamayı kabul edersiniz. Özellikle:",
+      "userConductItem1": "Zararlı dosya yükleyemez veya sistemlerimize müdahale veya zarar veremezsiniz.",
+      "userConductItem2": "Geçerli hukuka veya üçüncü taraf haklarına aykırı olacak şekilde izinsiz telif hakkı veya diğer materyal yükleyemezsiniz.",
+      "liabilityTitle": "Sorumluluk sınırı",
+      "liabilityBody": "Hizmet eğitim ve genel kullanım içindir; profesyonel bir garanti sunulmaz. Yasaların izin verdiği azami ölçüde, geliştirici Hizmeti kullanımınızdan veya yapay zeka üretimi veya hesaplanmış çıktılardaki hatalardan kaynaklanan akademik, mali veya diğer zararlardan sorumlu tutulamaz."
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Matematiği Word’e anında dönüştürün",
+      "subtitle": "Yapay zeka ile formül yazın, göz atın veya tarayın. LaTeX, MathML ve profesyonel dışa aktarım için tam çalışma alanı."
+    },
+    "workspaceTab": "Canlı Editör"
+  },
+  "workspace": {
+    "ariaWorkspace": "Formül çalışma alanı",
+    "howToUseAria": "Çalışma alanı nasıl kullanılır",
+    "howToUseTitle": "Nasıl kullanılır",
+    "howToUseBody": "Görseli Tara — Ekran görüntüsü yükleyin veya yapıştırın; yapay zeka formülü okur ve LaTeX doldurur (birincil API meşgulse yedek hizmet ile).\nHesapla — İfadeler için sayısal değer alın veya = içeren bir denklem yazdıktan sonra (ör. x^2+2x+1=0) çözümleri görün.\nWord için Kopyala — Microsoft Word’e yapıştırabileceğiniz MathML kopyalar.",
+    "title": "Formül çalışma alanı",
+    "status": {
+      "empty": {
+        "label": "Boş",
+        "detail": "Başlamak için bir formül ekleyin"
+      },
+      "invalid": {
+        "label": "Dikkat gerekli",
+        "detail": "Sözdizimi sorunu"
+      },
+      "ready": {
+        "label": "Hazır",
+        "detail": "Senkron · MathML tamam"
+      }
+    },
+    "toolbar": {
+      "undo": "Geri al",
+      "redo": "Yinele",
+      "clear": "Temizle"
+    },
+    "ocrLoading": {
+      "title": "Yapay zeka formülünüzü çözüyor...",
+      "subtitle": "Bu genellikle birkaç saniye sürer."
+    },
+    "copyWord": "Word için Kopyala",
+    "saveToLibrary": "Kütüphaneye Kaydet",
+    "scanImage": "Görseli Tara",
+    "scanImageHint": "Ekran görüntüsü yükleyin veya yapıştırın; yapay zeka LaTeX çıkarır",
+    "calculate": "Hesapla",
+    "calculateAria": "Sayısal sonuç hesapla",
+    "closeVirtualKeyboard": "Klavyeyi kapat",
+    "mobileKeyboardHint": "Matematik klavyesini gerektiğinde açmak için formül çubuğundaki klavye simgesine dokunun.",
+    "resultLabel": "Sonuç",
+    "solutionLabel": "Çözüm",
+    "resultSymbolic": "Sembolik ifade algılandı. Sayısal değerler deneyin.",
+    "equationNoSolutions": "Çözüm bulunamadı.",
+    "export": {
+      "section": "Dışa aktar",
+      "svgAria": "SVG indir",
+      "svgTitle": "SVG — vektör görüntü",
+      "pngAria": "PNG indir",
+      "pngTitle": "PNG — şeffaf raster",
+      "pdfAria": "PDF indir",
+      "pdfTitle": "PDF — tek sayfa belge",
+      "copyRawAria": "Ham LaTeX kopyala",
+      "copyRawTitle": "LaTeX kaynağını kopyala"
+    },
+    "footnote": "Word için Kopyala MathML kullanır. Dosya dışa aktarımları MathLive görünümünüzü yakalar.",
+    "saveModal": {
+      "title": "Formülü kaydet",
+      "description": "Bu formül için özel bir ad girin.",
+      "placeholder": "Örnek: Zincir kuralı"
+    },
+    "ocrModal": {
+      "title": "Görselden formül tara",
+      "hintBefore": "Dosya bırakın, yüklemek için tıklayın veya",
+      "hintAfter": "ile ekran görüntüsü yapıştırın.",
+      "keyCtrl": "Ctrl",
+      "keyV": "V",
+      "dropzone": "Görsel seçmek için tıklayın veya sürükleyip bırakın",
+      "pasteNote": "Bu iletişim kutusu açıkken yapıştırma çalışır"
+    },
+    "toast": {
+      "ocrSuccess": "Formül görselden çıkarıldı.",
+      "ocrReadFailed": "Görselden formül okunamadı.",
+      "ocrRequestFailed": "OCR isteği başarısız.",
+      "ocrNoLatex": "Yanıtta LaTeX yok.",
+      "fileReadFailed": "Dosya okunamadı.",
+      "ocrInvalidFile": "Lütfen bir görsel dosyası yapıştırın veya yükleyin.",
+      "ocrTooLarge": "Görsel çok büyük (sıkıştırmadan önce en fazla ~12 MB). Daha küçük bir fotoğraf deneyin.",
+      "signInToSave": "Formül kaydetmek için lütfen giriş yapın.",
+      "enterFormula": "Kaydetmeden önce bir formül girin.",
+      "titleRequired": "Lütfen bir başlık girin.",
+      "supabaseMissing": "Supabase yapılandırılmamış.",
+      "sessionExpired": "Oturumunuz sona erdi. Lütfen tekrar giriş yapın.",
+      "saveNotConfirmed": "Formül kaydı veritabanı tarafından onaylanmadı.",
+      "saveSuccess": "Formül başarıyla kaydedildi.",
+      "saveFailed": "Formül kaydedilemedi.",
+      "signInFirst": "Lütfen önce giriş yapın.",
+      "addBeforeExport": "Dışa aktarmadan önce bir formül ekleyin.",
+      "exportDownloaded": "{format} indirildi.",
+      "exportFailed": "{format} dışa aktarılamadı. Tekrar deneyin.",
+      "latexCopied": "LaTeX kopyalandı.",
+      "latexCopyFailed": "LaTeX kopyalanamadı.",
+      "copyWordSuccess": "Kopyalandı! Word’e yapıştırabilirsiniz ✅",
+      "copyFailed": "Kopyalama başarısız.",
+      "rawLatexCopied": "Ham LaTeX kopyalandı.",
+      "calcEmpty": "Hesaplamak için bir formül girin.",
+      "calcSyntax": "İfade ayrıştırılamadı veya değerlendirilemedi.",
+      "calcZerodiv": "Sıfıra bölme.",
+      "calcDomain": "Bu ifade için geçersiz değer."
+    }
+  },
+  "latexSource": {
+    "title": "LaTeX kaynağı",
+    "show": "Göster",
+    "hide": "Gizle",
+    "copyTitle": "LaTeX kopyala"
+  },
+  "library": {
+    "title": "Formül kütüphanesi",
+    "subtitle": "Yaygın matematiksel ifadelere hızlı erişim.",
+    "viewAll": "Tümünü gör",
+    "showLess": "Daha az göster",
+    "searchPlaceholder": "Formül ara... (ör. Pisagor, Türev)",
+    "loadingMyLibrary": "Kütüphanem yükleniyor...",
+    "noMatch": "Aramanızla eşleşen formül yok.",
+    "signInForMyLibrary": "Kütüphaneme erişmek için lütfen giriş yapın.",
+    "loadFailed": "Kütüphanem yüklenemedi.",
+    "filters": {
+      "all": "Tümü",
+      "my-library": "Kütüphanem",
+      "algebra": "Cebir",
+      "geometry": "Geometri",
+      "trigonometry": "Trigonometri",
+      "derivatives": "Türevler",
+      "integrals": "İntegraller"
+    }
+  },
+  "Formulas": {
+    "categories": {
+      "algebra": "Cebir",
+      "geometry": "Geometri",
+      "trigonometry": "Trigonometri",
+      "derivatives": "Türevler",
+      "integrals": "İntegraller"
+    },
+    "alg-quadratic": "İkinci derece formül",
+    "alg-difference-squares": "Kareler farkı",
+    "alg-binomial-2": "Binom açılımı (kare)",
+    "alg-log-product": "Log çarpım kuralı",
+    "alg-log-quotient": "Log bölüm kuralı",
+    "alg-exp-product": "Üs çarpım kuralı",
+    "geo-pythagorean": "Pisagor teoremi",
+    "geo-circle-area": "Daire alanı",
+    "geo-circle-circumference": "Daire çevresi",
+    "geo-triangle-area": "Üçgen alanı",
+    "geo-sphere-volume": "Küre hacmi",
+    "geo-cylinder-volume": "Silindir hacmi",
+    "trig-pythagorean-identity": "Pisagor özdeşliği",
+    "trig-tan-identity": "Teğet özdeşliği",
+    "trig-sine-rule": "Sinüs teoremi",
+    "trig-cosine-rule": "Kosinüs teoremi",
+    "trig-double-angle-sin": "Çift açı (Sin)",
+    "trig-double-angle-cos": "Çift açı (Cos)",
+    "derivative-power": "Kuvvet kuralı",
+    "derivative-product": "Çarpım kuralı",
+    "derivative-quotient": "Bölüm kuralı",
+    "derivative-chain": "Zincir kuralı",
+    "derivative-sin": "Sin türevi",
+    "derivative-ln": "ln(x) türevi",
+    "integral-power": "İntegral kuvvet kuralı",
+    "integral-by-parts": "Kısmi integrasyon",
+    "integral-substitution": "u-dönüşümü",
+    "integral-fundamental-theorem": "Temel teorem",
+    "integral-definite": "Belirli integral",
+    "integral-exponential": "Üstel fonksiyon integrali"
+  },
+  "formulaCard": {
+    "renderError": "Formül oluşturulamadı",
+    "copyWord": "Word için Kopyala",
+    "edit": "Düzenle"
+  },
+  "theme": {
+    "switchToLight": "Açık temaya geç",
+    "switchToDark": "Koyu temaya geç",
+    "light": "Açık tema",
+    "dark": "Koyu tema"
+  },
+  "howItWorks": {
+    "meta": {
+      "title": "Nasıl çalışır — FormulaConvert",
+      "description": "FormulaConvert’in LaTeX’i Word için MathML’e nasıl dönüştürdüğünü öğrenin."
+    },
+    "badge": "Genel bakış",
+    "title": "Nasıl çalışır",
+    "intro": "FormulaConvert LaTeX’i Word uyumlu MathML’e çevirir ve kişisel formüllerinizi düzenli tutar — ödev, araştırma ve teknik yazı için.",
+    "stepLabel": "Adım {step}",
+    "steps": {
+      "1": {
+        "title": "Yazın veya göz atın",
+        "description": "Formül çalışma alanında görsel olarak LaTeX oluşturun, yapay zeka ile tarayın veya Formül Kütüphanesi’nden ifade ekleyin."
+      },
+      "2": {
+        "title": "Word için dönüştürün",
+        "description": "Hazır olduğunuzda Microsoft Word için MathML olarak kopyalayın. Belgenize yapıştırın; Word düzenlenebilir denklem olarak işler."
+      },
+      "3": {
+        "title": "Kaydedin ve yönetin",
+        "description": "Özel formülleri özel kütüphanenize kaydetmek için giriş yapın. Kütüphanem’den arama, düzenleme, kopyalama veya silme yapın."
+      }
+    },
+    "ctaTitle": "Denemeye hazır mısınız?",
+    "openLiveEditor": "Canlı Editör’ü aç",
+    "goMyLibrary": "Kütüphaneme git"
+  },
+  "myLibraryPage": {
+    "meta": {
+      "title": "Kütüphanem — FormulaConvert",
+      "description": "Kayıtlı LaTeX formülleriniz."
+    },
+    "badge": "Çalışma alanı",
+    "title": "Kütüphanem",
+    "description": "Hesabınıza kaydettiğiniz formüllerde arama yapın, kopyalayın, düzenleyin veya silin. Tek tıkla Canlı Editör’e gönderin.",
+    "openLiveEditor": "Canlı Editör’ü aç",
+    "loadErrorFallback": "Kütüphanem formülleri yüklenemedi."
+  },
+  "myLibraryGrid": {
+    "savedAt": "Kayıt: {date}",
+    "cantDisplay": "Formül gösterilemiyor",
+    "copyTitle": "Word için Kopyala",
+    "copyAria": "Word için Kopyala",
+    "editTitle": "Canlı Editör’de düzenle",
+    "editAria": "Canlı Editör’de düzenle",
+    "deleteTitle": "Formülü sil",
+    "deleteAria": "Formülü sil",
+    "searchPlaceholder": "Başlık veya LaTeX ile ara...",
+    "formulaOne": "formül",
+    "formulaMany": "formüller",
+    "shownOf": "{total} içinden {shown} gösteriliyor",
+    "emptyTitle": "Henüz kayıtlı formül yok",
+    "emptyHint": "Canlı Editör’den bir formül kaydedin — burada görünecektir.",
+    "noSearchMatch": "Aramanızla eşleşen formül yok.",
+    "clearSearch": "Aramayı temizle",
+    "deleteConfirm": "Bu formülü kütüphanenizden silmek istiyor musunuz? Bu işlem geri alınamaz.",
+    "toast": {
+      "copyWordSuccess": "Kopyalandı! Word’e yapıştırabilirsiniz ✅",
+      "copyFailed": "Kopyalama başarısız.",
+      "deleted": "Formül silindi.",
+      "deleteFailed": "Formül silinemedi."
+    }
+  }
+}

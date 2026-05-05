@@ -15,6 +15,14 @@ type AuthenticatedUser = {
 
 const localeList = routing.locales;
 
+function BrandWordmark() {
+  return (
+    <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
+      Math<span className="text-primary">Formula</span>
+    </span>
+  );
+}
+
 const iconCircleShell =
   "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-700 shadow-sm transition-colors hover:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800";
 
@@ -156,7 +164,13 @@ export function Header({
   };
 
   const localeLabel = (loc: Locale) =>
-    t(`language.${loc}` as "language.en" | "language.de" | "language.cs");
+    t(
+      `language.${loc}` as
+        | "language.en"
+        | "language.de"
+        | "language.cs"
+        | "language.tr",
+    );
 
   const closeDrawer = () => setIsMobileDrawerOpen(false);
 
@@ -298,9 +312,9 @@ export function Header({
           <div className="flex shrink-0 items-center justify-between gap-3 border-b border-slate-200 px-4 py-3 dark:border-slate-700">
             <h2
               id="mobile-drawer-title"
-              className="truncate font-h3 text-h3 text-slate-900 dark:text-slate-100"
+              className="flex min-w-0 shrink-0 items-center"
             >
-              {t("brand")}
+              <BrandWordmark />
             </h2>
             <button
               type="button"
@@ -495,18 +509,17 @@ export function Header({
   return (
     <>
       <header className="sticky top-0 z-[100] w-full border-b border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
-        <div className="relative mx-auto flex h-16 max-w-7xl min-w-0 items-center justify-between gap-3 overflow-x-clip px-4 md:h-20 md:px-8">
-          <div className="flex min-w-0 shrink-0 items-center">
-            <Link
-              href="/"
-              className="truncate text-lg font-bold tracking-tight text-slate-900 hover:opacity-90 sm:text-xl dark:text-slate-50"
-            >
-              {t("brand")}
-            </Link>
-          </div>
+        <div className="relative mx-auto flex h-16 max-w-7xl min-w-0 items-center justify-between gap-4 overflow-x-clip px-4 md:h-20 md:px-8 md:justify-start">
+          <Link
+            href="/"
+            className="inline-flex shrink-0 items-center hover:opacity-90"
+            aria-label="MathFormula"
+          >
+            <BrandWordmark />
+          </Link>
 
           <nav
-            className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:block"
+            className="hidden min-w-0 flex-1 items-center justify-center md:flex"
             aria-label="Main"
           >
             <div className="flex h-full items-stretch gap-8 lg:gap-10">

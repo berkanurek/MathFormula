@@ -44,15 +44,53 @@
       "label": "Language",
       "en": "English",
       "de": "Deutsch",
-      "cs": "Čeština"
+      "cs": "Čeština",
+      "tr": "Türkçe"
     }
   },
   "footer": {
     "copyright": "© 2026 FormulaConvert. Built for academic excellence.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "contact": "Contact Support",
-    "docs": "Documentation"
+    "contactDeveloper": "Contact Developer",
+    "signatureRich": "Developed by <b>Berkan Urek</b> for <b>Simal Naz</b>."
+  },
+  "legal": {
+    "privacy": {
+      "metaTitle": "Privacy Policy — FormulaConvert",
+      "metaDescription": "How FormulaConvert collects, uses, and protects your data when you use MathFormula.",
+      "lastUpdated": "Last updated: May 2026",
+      "title": "Privacy Policy for MathFormula",
+      "introductionTitle": "Introduction",
+      "introductionBody": "We value your privacy. This policy explains how we handle user data when you use MathFormula (FormulaConvert). We are committed to protecting your privacy and being transparent about our practices.",
+      "dataCollectionTitle": "Data collection",
+      "dataCollectionItem1": "We collect email addresses via Supabase when you create an account or sign in, for authentication and secure account management.",
+      "dataCollectionItem2": "Images you upload for formula scanning may be processed through Google Gemini and OpenRouter APIs. We may also collect limited technical information (such as browser or device type) needed to run and protect the service.",
+      "imageProcessingTitle": "Image processing",
+      "imageProcessingLead": "Uploaded images are processed in real-time using Google Gemini and OpenRouter APIs.",
+      "imageProcessingEmphasis": "We do not store your original images on our servers unless you save them to your Personal Library.",
+      "dataSecurityTitle": "Data security",
+      "dataSecurityBody": "We use industry-standard security practices and encryption provided by our infrastructure partners, including Vercel (hosting) and Supabase (authentication and database), to protect data in transit and at rest.",
+      "thirdPartyTitle": "Third-party disclosure",
+      "thirdPartyBody": "We do not sell or trade your personal information to outside parties for marketing. Service providers (hosting, authentication, AI APIs) process data only as needed to operate the product, in line with this policy and their terms."
+    },
+    "terms": {
+      "metaTitle": "Terms of Service — FormulaConvert",
+      "metaDescription": "Terms governing use of MathFormula (FormulaConvert) at mathformula.xyz.",
+      "lastUpdated": "Last updated: May 2026",
+      "title": "Terms of Service",
+      "acceptanceTitle": "Acceptance",
+      "acceptanceBody": "By accessing or using MathFormula at mathformula.xyz (the \"Service\"), you agree to these Terms of Service. If you do not agree, do not use the Service.",
+      "accuracyTitle": "Accuracy disclaimer",
+      "accuracyLead": "MathFormula is an AI-powered tool. We provide results as is. AI may produce errors—please verify results independently.",
+      "accuracyBody": "The developer (Berkan Urek) does not guarantee 100% accuracy in mathematical calculations or interpretations. Users should verify results independently before relying on them for academic, professional, or financial decisions.",
+      "userConductTitle": "User conduct",
+      "userConductIntro": "You agree not to misuse the Service. In particular:",
+      "userConductItem1": "You must not upload malicious files or attempt to disrupt or compromise our systems.",
+      "userConductItem2": "You must not upload copyrighted or other material without permission when doing so would violate applicable law or third-party rights.",
+      "liabilityTitle": "Limitation of liability",
+      "liabilityBody": "The Service is intended for educational and general purposes; no professional guarantee is provided. To the fullest extent permitted by law, the developer is not responsible for any academic, financial, or other loss or damage arising from your use of or reliance on the Service, including errors or omissions in AI-generated or computed output."
+    }
   },
   "home": {
     "hero": {

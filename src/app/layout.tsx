@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html
       suppressHydrationWarning
-      className={`${inter.variable} h-full scroll-smooth antialiased`}
+      className={`${inter.variable} min-h-[100dvh] scroll-smooth antialiased`}
     >
       <head>
         {/* Material Symbols — loaded from Google Fonts CDN (not bundled in next/font). */}
@@ -28,7 +28,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="flex min-h-full flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <body className="flex min-h-[100dvh] flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

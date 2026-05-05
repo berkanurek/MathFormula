@@ -44,15 +44,53 @@
       "label": "Jazyk",
       "en": "English",
       "de": "Deutsch",
-      "cs": "Čeština"
+      "cs": "Čeština",
+      "tr": "Türkçe"
     }
   },
   "footer": {
     "copyright": "© 2026 FormulaConvert. Pro akademickou excelenci.",
     "privacy": "Ochrana soukromí",
     "terms": "Podmínky služby",
-    "contact": "Kontaktovat podporu",
-    "docs": "Dokumentace"
+    "contactDeveloper": "Kontaktovat vývojáře",
+    "signatureRich": "Vyvinuto uživatelem <b>Berkan Urek</b> pro <b>Simal Naz</b>."
+  },
+  "legal": {
+    "privacy": {
+      "metaTitle": "Zásady ochrany osobních údajů — FormulaConvert",
+      "metaDescription": "Jak FormulaConvert (MathFormula) zpracovává a chrání vaše údaje.",
+      "lastUpdated": "Naposledy aktualizováno: květen 2026",
+      "title": "Zásady ochrany osobních údajů pro MathFormula",
+      "introductionTitle": "Úvod",
+      "introductionBody": "Vaše soukromí je pro nás důležité. Tyto zásady popisují, jak zpracováváme údaje uživatelů při používání MathFormula (FormulaConvert). Zavazujeme se chránit vaše soukromí a postupovat transparentně.",
+      "dataCollectionTitle": "Sběr údajů",
+      "dataCollectionItem1": "E-mailové adresy shromažďujeme prostřednictvím Supabase při registraci nebo přihlášení – pro ověření identity a správu účtu.",
+      "dataCollectionItem2": "Obrázky vzorců nahrávané ke skenování mohou být zpracovány přes rozhraní Google Gemini a OpenRouter. Můžeme také shromažďovat omezené technické údaje (např. typ prohlížeče) potřebné k provozu a zabezpečení služby.",
+      "imageProcessingTitle": "Zpracování obrázků",
+      "imageProcessingLead": "Nahrané obrázky jsou zpracovávány v reálném čase pomocí rozhraní Google Gemini a OpenRouter.",
+      "imageProcessingEmphasis": "Původní obrázky na našich serverech neukládáme, pokud je neuložíte do osobní knihovny.",
+      "dataSecurityTitle": "Zabezpečení údajů",
+      "dataSecurityBody": "Využíváme běžné bezpečnostní postupy a šifrování našich infrastrukturních partnerů včetně Vercel (hosting) a Supabase (ověřování a databáze) pro ochranu dat při přenosu i uložení.",
+      "thirdPartyTitle": "Sdílení s třetími stranami",
+      "thirdPartyBody": "Vaše osobní údaje neprodáváme ani neobchodujeme s nimi za účelem marketingu. Poskytovatelé služeb (hosting, ověřování, AI API) zpracovávají údaje pouze v rozsahu nutném pro provoz produktu v souladu s těmito zásadami a svými podmínkami."
+    },
+    "terms": {
+      "metaTitle": "Podmínky služby — FormulaConvert",
+      "metaDescription": "Podmínky používání MathFormula (FormulaConvert) na mathformula.xyz.",
+      "lastUpdated": "Naposledy aktualizováno: květen 2026",
+      "title": "Podmínky služby",
+      "acceptanceTitle": "Souhlas",
+      "acceptanceBody": "Přístupem k MathFormula na mathformula.xyz nebo jejím používáním (dále „služba“) souhlasíte s těmito podmínkami. Pokud nesouhlasíte, službu nepoužívejte.",
+      "accuracyTitle": "Upozornění na přesnost",
+      "accuracyLead": "MathFormula využívá AI. Výsledky jsou poskytovány „tak jak jsou“. AI může chybovat – výsledky prosím ověřujte.",
+      "accuracyBody": "Vývojář (Berkan Urek) negarantuje stoprocentní přesnost matematických výpočtů ani interpretací. Před spolehnutím na výsledky v akademické, profesní nebo finanční oblasti je ověřte samostatně.",
+      "userConductTitle": "Chování uživatelů",
+      "userConductIntro": "Zavazujete se službu nezneužívat. Zejména:",
+      "userConductItem1": "nesmíte nahrávat škodlivé soubory ani narušovat nebo ohrožovat naše systémy;",
+      "userConductItem2": "nesmíte nahrávat materiál chráněný autorským právem nebo jiný bez oprávnění, pokud by to porušovalo právní předpisy nebo práva třetích stran.",
+      "liabilityTitle": "Omezení odpovědnosti",
+      "liabilityBody": "Služba je určena pro vzdělávací a obecné účely; neposkytujeme profesní záruku. V maximálním rozsahu přípustném zákonem vývojář neodpovídá za akademické, finanční ani jiné ztrávy vzniklé používáním nebo spoléháním se na službu včetně chyb nebo opomenutí ve výstupech AI nebo výpočtů."
+    }
   },
   "home": {
     "hero": {
