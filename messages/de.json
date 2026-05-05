@@ -30,7 +30,9 @@
       "signInTitle": "Anmelden",
       "signUpTitle": "Registrieren",
       "signInSubmit": "Anmelden",
-      "signUpSubmit": "Registrieren"
+      "signUpSubmit": "Registrieren",
+      "continueWithGoogle": "Mit Google fortfahren",
+      "orContinueWithEmail": "Oder mit E-Mail fortfahren"
     },
     "toast": {
       "emailPasswordRequired": "E-Mail und Passwort sind erforderlich.",
@@ -38,7 +40,9 @@
       "signUpSuccess": "Registrierung erfolgreich. Bitte prüfen Sie Ihre E-Mail zur Bestätigung.",
       "authFailed": "Authentifizierung fehlgeschlagen.",
       "signedOut": "Abgemeldet.",
-      "signOutFailed": "Abmelden fehlgeschlagen."
+      "signOutFailed": "Abmelden fehlgeschlagen.",
+      "googleOAuthFailed": "Google-Anmeldung konnte nicht gestartet werden. Bitte erneut versuchen.",
+      "supabaseMissing": "Supabase ist nicht konfiguriert."
     },
     "language": {
       "label": "Sprache",

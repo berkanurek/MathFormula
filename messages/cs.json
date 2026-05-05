@@ -30,7 +30,9 @@
       "signInTitle": "Přihlášení",
       "signUpTitle": "Registrace",
       "signInSubmit": "Přihlásit se",
-      "signUpSubmit": "Registrovat se"
+      "signUpSubmit": "Registrovat se",
+      "continueWithGoogle": "Pokračovat přes Google",
+      "orContinueWithEmail": "Nebo pokračovat e-mailem"
     },
     "toast": {
       "emailPasswordRequired": "Vyplňte e-mail a heslo.",
@@ -38,7 +40,9 @@
       "signUpSuccess": "Registrace proběhla. Zkontrolujte e-mail pro ověření.",
       "authFailed": "Ověření se nezdařilo.",
       "signedOut": "Odhlášeni.",
-      "signOutFailed": "Odhlášení se nezdařilo."
+      "signOutFailed": "Odhlášení se nezdařilo.",
+      "googleOAuthFailed": "Přihlášení přes Google se nepodařilo spustit. Zkuste to znovu.",
+      "supabaseMissing": "Supabase není nakonfigurováno."
     },
     "language": {
       "label": "Jazyk",

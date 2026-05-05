@@ -30,7 +30,9 @@
       "signInTitle": "Giriş yap",
       "signUpTitle": "Kayıt ol",
       "signInSubmit": "Giriş yap",
-      "signUpSubmit": "Kayıt ol"
+      "signUpSubmit": "Kayıt ol",
+      "continueWithGoogle": "Google ile devam et",
+      "orContinueWithEmail": "Veya e-posta ile devam et"
     },
     "toast": {
       "emailPasswordRequired": "E-posta ve şifre gereklidir.",
@@ -38,7 +40,9 @@
       "signUpSuccess": "Kayıt başarılı. E-posta doğrulamanızı kontrol edin.",
       "authFailed": "Kimlik doğrulama başarısız.",
       "signedOut": "Çıkış yapıldı.",
-      "signOutFailed": "Çıkış başarısız."
+      "signOutFailed": "Çıkış başarısız.",
+      "googleOAuthFailed": "Google ile giriş başlatılamadı. Tekrar deneyin.",
+      "supabaseMissing": "Supabase yapılandırılmamış."
     },
     "language": {
       "label": "Dil",

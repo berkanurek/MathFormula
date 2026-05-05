@@ -30,7 +30,9 @@
       "signInTitle": "Sign In",
       "signUpTitle": "Sign Up",
       "signInSubmit": "Sign In",
-      "signUpSubmit": "Sign Up"
+      "signUpSubmit": "Sign Up",
+      "continueWithGoogle": "Continue with Google",
+      "orContinueWithEmail": "Or continue with email"
     },
     "toast": {
       "emailPasswordRequired": "Email and password are required.",
@@ -38,7 +40,9 @@
       "signUpSuccess": "Sign up successful. Check your email verification.",
       "authFailed": "Authentication failed.",
       "signedOut": "Signed out.",
-      "signOutFailed": "Sign out failed."
+      "signOutFailed": "Sign out failed.",
+      "googleOAuthFailed": "Google sign-in could not start. Try again.",
+      "supabaseMissing": "Supabase is not configured."
     },
     "language": {
       "label": "Language",
