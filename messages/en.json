@@ -1,0 +1,296 @@
+{
+  "metadata": {
+    "title": "MathFormula",
+    "description": "LaTeX to Word Formula Converter and Library"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "email": "Email",
+    "password": "Password",
+    "saving": "Saving...",
+    "save": "Save",
+    "untitledFormula": "Untitled Formula"
+  },
+  "header": {
+    "brand": "FormulaConvert",
+    "nav": {
+      "liveEditor": "Live Editor",
+      "myLibrary": "My Library",
+      "howItWorks": "How it works"
+    },
+    "accountMenu": "Account menu",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "auth": {
+      "signInTitle": "Sign In",
+      "signUpTitle": "Sign Up",
+      "signInSubmit": "Sign In",
+      "signUpSubmit": "Sign Up"
+    },
+    "toast": {
+      "emailPasswordRequired": "Email and password are required.",
+      "signedIn": "Signed in successfully.",
+      "signUpSuccess": "Sign up successful. Check your email verification.",
+      "authFailed": "Authentication failed.",
+      "signedOut": "Signed out.",
+      "signOutFailed": "Sign out failed."
+    },
+    "language": {
+      "label": "Language",
+      "en": "English",
+      "de": "Deutsch",
+      "cs": "Čeština"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 FormulaConvert. Built for academic excellence.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Support",
+    "docs": "Documentation"
+  },
+  "home": {
+    "hero": {
+      "title": "Convert Math to Word Instantly",
+      "subtitle": "Write, browse, or scan formulas with AI. The ultimate workspace for LaTeX, MathML, and professional exports."
+    },
+    "workspaceTab": "Live Editor"
+  },
+  "workspace": {
+    "ariaWorkspace": "Formula workspace",
+    "howToUseAria": "How to use the workspace",
+    "howToUseTitle": "How to use",
+    "howToUseBody": "Scan Image — Upload or paste a screenshot; AI reads the formula and fills LaTeX (with a backup service if the primary API is busy).\nCalculate — Get a numeric value for expressions, or tap after typing an equation with = (e.g. x^2+2x+1=0) to see solutions.\nCopy for Word — Copies MathML you can paste into Microsoft Word.",
+    "title": "Formula Workspace",
+    "status": {
+      "empty": {
+        "label": "Empty",
+        "detail": "Add a formula to get started"
+      },
+      "invalid": {
+        "label": "Needs attention",
+        "detail": "Syntax issue"
+      },
+      "ready": {
+        "label": "Ready",
+        "detail": "Synced · MathML OK"
+      }
+    },
+    "toolbar": {
+      "undo": "Undo",
+      "redo": "Redo",
+      "clear": "Clear"
+    },
+    "ocrLoading": {
+      "title": "AI is deciphering your formula...",
+      "subtitle": "This usually takes a few seconds."
+    },
+    "copyWord": "Copy for Word",
+    "saveToLibrary": "Save to Library",
+    "scanImage": "Scan Image",
+    "scanImageHint": "Upload or paste a screenshot; AI extracts LaTeX",
+    "calculate": "Calculate",
+    "calculateAria": "Calculate numerical result",
+    "closeVirtualKeyboard": "Close keyboard",
+    "resultLabel": "Result",
+    "solutionLabel": "Solution",
+    "resultSymbolic": "Symbolic expression detected. Try providing numerical values.",
+    "equationNoSolutions": "No solutions found.",
+    "export": {
+      "section": "Export",
+      "svgAria": "Download SVG",
+      "svgTitle": "SVG — vector image",
+      "pngAria": "Download PNG",
+      "pngTitle": "PNG — transparent raster",
+      "pdfAria": "Download PDF",
+      "pdfTitle": "PDF — single-page document",
+      "copyRawAria": "Copy raw LaTeX",
+      "copyRawTitle": "Copy LaTeX source"
+    },
+    "footnote": "Copy for Word uses MathML. File exports capture your MathLive view.",
+    "saveModal": {
+      "title": "Save Formula",
+      "description": "Enter a custom name for this formula.",
+      "placeholder": "Example: Chain Rule"
+    },
+    "ocrModal": {
+      "title": "Scan formula from image",
+      "hintBefore": "Drop a file, click to upload, or press",
+      "hintAfter": "to paste a screenshot.",
+      "keyCtrl": "Ctrl",
+      "keyV": "V",
+      "dropzone": "Click to choose an image or drag and drop",
+      "pasteNote": "Pasting works when this dialog is open"
+    },
+    "toast": {
+      "ocrSuccess": "Formula extracted from image.",
+      "ocrReadFailed": "Could not read the formula from the image.",
+      "ocrRequestFailed": "OCR request failed.",
+      "ocrNoLatex": "No LaTeX in response.",
+      "fileReadFailed": "Could not read file.",
+      "ocrInvalidFile": "Please paste or upload an image file.",
+      "ocrTooLarge": "Image is too large (max ~4 MB). Try a smaller screenshot.",
+      "signInToSave": "Please sign in to save formulas.",
+      "enterFormula": "Enter a formula before saving.",
+      "titleRequired": "Please enter a title.",
+      "supabaseMissing": "Supabase is not configured.",
+      "sessionExpired": "Your session expired. Please sign in again.",
+      "saveNotConfirmed": "Formula save was not confirmed by the database.",
+      "saveSuccess": "Formula saved successfully.",
+      "saveFailed": "Formula could not be saved.",
+      "signInFirst": "Please sign in first.",
+      "addBeforeExport": "Add a formula before exporting.",
+      "exportDownloaded": "{format} downloaded.",
+      "exportFailed": "{format} export failed. Try again.",
+      "latexCopied": "LaTeX copied.",
+      "latexCopyFailed": "Could not copy LaTeX.",
+      "copyWordSuccess": "Copied! You can paste it into Word ✅",
+      "copyFailed": "Copy failed.",
+      "rawLatexCopied": "Raw LaTeX copied.",
+      "calcEmpty": "Enter a formula to calculate.",
+      "calcSyntax": "Could not parse or evaluate the expression.",
+      "calcZerodiv": "Division by zero.",
+      "calcDomain": "Invalid value for this expression."
+    }
+  },
+  "latexSource": {
+    "title": "LaTeX source",
+    "show": "Show",
+    "hide": "Hide",
+    "copyTitle": "Copy LaTeX"
+  },
+  "library": {
+    "title": "Formula Library",
+    "subtitle": "Quick access to common mathematical expressions.",
+    "viewAll": "View all",
+    "showLess": "Show less",
+    "searchPlaceholder": "Search formulas... (e.g., Pythagorean, Derivative)",
+    "loadingMyLibrary": "Loading My Library...",
+    "noMatch": "No formulas matched your search.",
+    "signInForMyLibrary": "Please sign in to access My Library.",
+    "loadFailed": "My Library could not be loaded.",
+    "filters": {
+      "all": "All",
+      "my-library": "My Library",
+      "algebra": "Algebra",
+      "geometry": "Geometry",
+      "trigonometry": "Trigonometry",
+      "derivatives": "Derivatives",
+      "integrals": "Integrals"
+    }
+  },
+  "Formulas": {
+    "categories": {
+      "algebra": "Algebra",
+      "geometry": "Geometry",
+      "trigonometry": "Trigonometry",
+      "derivatives": "Derivatives",
+      "integrals": "Integrals"
+    },
+    "alg-quadratic": "Quadratic Formula",
+    "alg-difference-squares": "Difference of Squares",
+    "alg-binomial-2": "Binomial Expansion (Square)",
+    "alg-log-product": "Log Product Rule",
+    "alg-log-quotient": "Log Quotient Rule",
+    "alg-exp-product": "Exponent Product Rule",
+    "geo-pythagorean": "Pythagorean Theorem",
+    "geo-circle-area": "Area of Circle",
+    "geo-circle-circumference": "Circumference of Circle",
+    "geo-triangle-area": "Area of Triangle",
+    "geo-sphere-volume": "Volume of Sphere",
+    "geo-cylinder-volume": "Volume of Cylinder",
+    "trig-pythagorean-identity": "Pythagorean Identity",
+    "trig-tan-identity": "Tangent Identity",
+    "trig-sine-rule": "Sine Rule",
+    "trig-cosine-rule": "Cosine Rule",
+    "trig-double-angle-sin": "Double Angle (Sin)",
+    "trig-double-angle-cos": "Double Angle (Cos)",
+    "derivative-power": "Power Rule",
+    "derivative-product": "Product Rule",
+    "derivative-quotient": "Quotient Rule",
+    "derivative-chain": "Chain Rule",
+    "derivative-sin": "Derivative of Sin",
+    "derivative-ln": "Derivative of ln(x)",
+    "integral-power": "Integral Power Rule",
+    "integral-by-parts": "Integration by Parts",
+    "integral-substitution": "u-Substitution",
+    "integral-fundamental-theorem": "Fundamental Theorem",
+    "integral-definite": "Definite Integral",
+    "integral-exponential": "Integral of Exponential"
+  },
+  "formulaCard": {
+    "renderError": "Formula could not be rendered",
+    "copyWord": "Copy for Word",
+    "edit": "Edit"
+  },
+  "theme": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "light": "Light mode",
+    "dark": "Dark mode"
+  },
+  "howItWorks": {
+    "meta": {
+      "title": "How it works — FormulaConvert",
+      "description": "Learn how FormulaConvert turns LaTeX into Word-ready MathML."
+    },
+    "badge": "Overview",
+    "title": "How it works",
+    "intro": "FormulaConvert turns LaTeX into Word-ready MathML and keeps your personal formulas organized—built for coursework, research, and technical writing.",
+    "stepLabel": "Step {step}",
+    "steps": {
+      "1": {
+        "title": "Write or browse",
+        "description": "Use the Formula Workspace to compose LaTeX visually, scan formulas with AI, or open the Formula Library and insert curated expressions."
+      },
+      "2": {
+        "title": "Convert for Word",
+        "description": "When you are ready, copy as MathML designed for Microsoft Word. Paste into your document and Word treats it as an editable equation."
+      },
+      "3": {
+        "title": "Save and manage",
+        "description": "Sign in to save custom formulas to your private library. Search, edit, copy, or remove entries anytime from My Library."
+      }
+    },
+    "ctaTitle": "Ready to try it?",
+    "openLiveEditor": "Open Live Editor",
+    "goMyLibrary": "Go to My Library"
+  },
+  "myLibraryPage": {
+    "meta": {
+      "title": "My Library — FormulaConvert",
+      "description": "Your saved LaTeX formulas."
+    },
+    "badge": "Workspace",
+    "title": "My Library",
+    "description": "Search, copy, edit, or remove formulas you have saved to your account. Send any item back to the Live Editor in one click.",
+    "openLiveEditor": "Open Live Editor",
+    "loadErrorFallback": "My Library formulas could not be loaded."
+  },
+  "myLibraryGrid": {
+    "savedAt": "Saved {date}",
+    "cantDisplay": "Formula can't be displayed",
+    "copyTitle": "Copy for Word",
+    "copyAria": "Copy for Word",
+    "editTitle": "Edit in Live Editor",
+    "editAria": "Edit in Live Editor",
+    "deleteTitle": "Delete formula",
+    "deleteAria": "Delete formula",
+    "searchPlaceholder": "Search by title or LaTeX...",
+    "formulaOne": "formula",
+    "formulaMany": "formulas",
+    "shownOf": "{shown} of {total} shown",
+    "emptyTitle": "No saved formulas yet",
+    "emptyHint": "Save a formula from the Live Editor — it will appear here.",
+    "noSearchMatch": "No formulas match your search.",
+    "clearSearch": "Clear search",
+    "deleteConfirm": "Delete this formula from your library? This cannot be undone.",
+    "toast": {
+      "copyWordSuccess": "Copied! You can paste it into Word ✅",
+      "copyFailed": "Copy failed.",
+      "deleted": "Formula deleted.",
+      "deleteFailed": "Formula could not be deleted."
+    }
+  }
+}

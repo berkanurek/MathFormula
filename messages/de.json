@@ -1,0 +1,296 @@
+{
+  "metadata": {
+    "title": "MathFormula",
+    "description": "LaTeX-zu-Word-Formelkonverter und Bibliothek"
+  },
+  "common": {
+    "cancel": "Abbrechen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "saving": "Speichern…",
+    "save": "Speichern",
+    "untitledFormula": "Unbenannte Formel"
+  },
+  "header": {
+    "brand": "FormulaConvert",
+    "nav": {
+      "liveEditor": "Live-Editor",
+      "myLibrary": "Meine Bibliothek",
+      "howItWorks": "So funktioniert’s"
+    },
+    "accountMenu": "Kontomenü",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "signOut": "Abmelden",
+    "auth": {
+      "signInTitle": "Anmelden",
+      "signUpTitle": "Registrieren",
+      "signInSubmit": "Anmelden",
+      "signUpSubmit": "Registrieren"
+    },
+    "toast": {
+      "emailPasswordRequired": "E-Mail und Passwort sind erforderlich.",
+      "signedIn": "Erfolgreich angemeldet.",
+      "signUpSuccess": "Registrierung erfolgreich. Bitte prüfen Sie Ihre E-Mail zur Bestätigung.",
+      "authFailed": "Authentifizierung fehlgeschlagen.",
+      "signedOut": "Abgemeldet.",
+      "signOutFailed": "Abmelden fehlgeschlagen."
+    },
+    "language": {
+      "label": "Sprache",
+      "en": "English",
+      "de": "Deutsch",
+      "cs": "Čeština"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 FormulaConvert. Für akademische Exzellenz gemacht.",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "contact": "Support kontaktieren",
+    "docs": "Dokumentation"
+  },
+  "home": {
+    "hero": {
+      "title": "Mathe sofort in Word umwandeln",
+      "subtitle": "Schreiben, browsen oder Formeln mit KI scannen. Der Arbeitsbereich für LaTeX, MathML und professionelle Exporte."
+    },
+    "workspaceTab": "Live-Editor"
+  },
+  "workspace": {
+    "ariaWorkspace": "Formel-Arbeitsbereich",
+    "howToUseAria": "So nutzen Sie den Arbeitsbereich",
+    "howToUseTitle": "So geht’s",
+    "howToUseBody": "Bild scannen — Screenshot hochladen oder einfügen; die KI erkennt die Formel und trägt LaTeX ein (mit Fallback, wenn die Haupt-API ausgelastet ist).\nBerechnen — Numerisches Ergebnis für Ausdrücke, oder nach einer Gleichung mit = (z. B. x^2+2x+1=0) Lösungen anzeigen.\nFür Word kopieren — Kopiert MathML zum Einfügen in Microsoft Word.",
+    "title": "Formel-Arbeitsbereich",
+    "status": {
+      "empty": {
+        "label": "Leer",
+        "detail": "Fügen Sie eine Formel hinzu"
+      },
+      "invalid": {
+        "label": "Achtung",
+        "detail": "Syntaxproblem"
+      },
+      "ready": {
+        "label": "Bereit",
+        "detail": "Synchron · MathML OK"
+      }
+    },
+    "toolbar": {
+      "undo": "Rückgängig",
+      "redo": "Wiederholen",
+      "clear": "Leeren"
+    },
+    "ocrLoading": {
+      "title": "KI entschlüsselt Ihre Formel…",
+      "subtitle": "Das dauert meist nur wenige Sekunden."
+    },
+    "copyWord": "Für Word kopieren",
+    "saveToLibrary": "In Bibliothek speichern",
+    "scanImage": "Bild scannen",
+    "scanImageHint": "Screenshot hochladen oder einfügen; KI extrahiert LaTeX",
+    "calculate": "Berechnen",
+    "calculateAria": "Numerisches Ergebnis berechnen",
+    "closeVirtualKeyboard": "Tastatur schließen",
+    "resultLabel": "Ergebnis",
+    "solutionLabel": "Lösung",
+    "resultSymbolic": "Symbolischer Ausdruck erkannt. Bitte geben Sie Zahlenwerte ein.",
+    "equationNoSolutions": "Keine Lösung gefunden.",
+    "export": {
+      "section": "Export",
+      "svgAria": "SVG herunterladen",
+      "svgTitle": "SVG — Vektorgrafik",
+      "pngAria": "PNG herunterladen",
+      "pngTitle": "PNG — Raster mit Transparenz",
+      "pdfAria": "PDF herunterladen",
+      "pdfTitle": "PDF — Einseitiges Dokument",
+      "copyRawAria": "Rohes LaTeX kopieren",
+      "copyRawTitle": "LaTeX-Quelle kopieren"
+    },
+    "footnote": "„Für Word kopieren“ verwendet MathML. Dateiexporte zeigen Ihre MathLive-Ansicht.",
+    "saveModal": {
+      "title": "Formel speichern",
+      "description": "Geben Sie einen Namen für diese Formel ein.",
+      "placeholder": "Beispiel: Kettenregel"
+    },
+    "ocrModal": {
+      "title": "Formel aus Bild scannen",
+      "hintBefore": "Datei ablegen, klicken zum Hochladen oder",
+      "hintAfter": "drücken, um einen Screenshot einzufügen.",
+      "keyCtrl": "Strg",
+      "keyV": "V",
+      "dropzone": "Bild wählen oder per Drag & Drop ablegen",
+      "pasteNote": "Einfügen funktioniert, solange dieser Dialog offen ist"
+    },
+    "toast": {
+      "ocrSuccess": "Formel aus dem Bild extrahiert.",
+      "ocrReadFailed": "Formel konnte aus dem Bild nicht gelesen werden.",
+      "ocrRequestFailed": "OCR-Anfrage fehlgeschlagen.",
+      "ocrNoLatex": "Keine LaTeX-Antwort.",
+      "fileReadFailed": "Datei konnte nicht gelesen werden.",
+      "ocrInvalidFile": "Bitte fügen Sie ein Bild ein oder laden Sie eine Bilddatei hoch.",
+      "ocrTooLarge": "Bild zu groß (max. ca. 4 MB). Versuchen Sie einen kleineren Screenshot.",
+      "signInToSave": "Bitte melden Sie an, um Formeln zu speichern.",
+      "enterFormula": "Geben Sie vor dem Speichern eine Formel ein.",
+      "titleRequired": "Bitte geben Sie einen Titel ein.",
+      "supabaseMissing": "Supabase ist nicht konfiguriert.",
+      "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte erneut anmelden.",
+      "saveNotConfirmed": "Speichern wurde von der Datenbank nicht bestätigt.",
+      "saveSuccess": "Formel erfolgreich gespeichert.",
+      "saveFailed": "Formel konnte nicht gespeichert werden.",
+      "signInFirst": "Bitte zuerst anmelden.",
+      "addBeforeExport": "Fügen Sie vor dem Export eine Formel hinzu.",
+      "exportDownloaded": "{format} heruntergeladen.",
+      "exportFailed": "{format}-Export fehlgeschlagen. Bitte erneut versuchen.",
+      "latexCopied": "LaTeX kopiert.",
+      "latexCopyFailed": "LaTeX konnte nicht kopiert werden.",
+      "copyWordSuccess": "Kopiert! In Word einfügen ✅",
+      "copyFailed": "Kopieren fehlgeschlagen.",
+      "rawLatexCopied": "Rohes LaTeX kopiert.",
+      "calcEmpty": "Geben Sie eine Formel ein, um zu berechnen.",
+      "calcSyntax": "Ausdruck konnte nicht verarbeitet werden.",
+      "calcZerodiv": "Division durch null.",
+      "calcDomain": "Ungültiger Wert für diesen Ausdruck."
+    }
+  },
+  "latexSource": {
+    "title": "LaTeX-Quelle",
+    "show": "Anzeigen",
+    "hide": "Ausblenden",
+    "copyTitle": "LaTeX kopieren"
+  },
+  "library": {
+    "title": "Formelbibliothek",
+    "subtitle": "Schnellzugriff auf häufige mathematische Ausdrücke.",
+    "viewAll": "Alle anzeigen",
+    "showLess": "Weniger anzeigen",
+    "searchPlaceholder": "Formeln suchen… (z. B. Pythagoras, Ableitung)",
+    "loadingMyLibrary": "Meine Bibliothek wird geladen…",
+    "noMatch": "Keine Formeln entsprechen Ihrer Suche.",
+    "signInForMyLibrary": "Bitte anmelden, um „Meine Bibliothek“ zu nutzen.",
+    "loadFailed": "Meine Bibliothek konnte nicht geladen werden.",
+    "filters": {
+      "all": "Alle",
+      "my-library": "Meine Bibliothek",
+      "algebra": "Algebra",
+      "geometry": "Geometrie",
+      "trigonometry": "Trigonometrie",
+      "derivatives": "Ableitungen",
+      "integrals": "Integrale"
+    }
+  },
+  "Formulas": {
+    "categories": {
+      "algebra": "Algebra",
+      "geometry": "Geometrie",
+      "trigonometry": "Trigonometrie",
+      "derivatives": "Ableitungen",
+      "integrals": "Integrale"
+    },
+    "alg-quadratic": "Mitternachtsformel",
+    "alg-difference-squares": "Dritte binomische Formel (Differenz)",
+    "alg-binomial-2": "Binomische Formel (zweite Potenz)",
+    "alg-log-product": "Logarithmengesetz: Produkt",
+    "alg-log-quotient": "Logarithmengesetz: Quotient",
+    "alg-exp-product": "Potenzgesetz: Multiplikation",
+    "geo-pythagorean": "Pythagoreischer Lehrsatz",
+    "geo-circle-area": "Kreisfläche",
+    "geo-circle-circumference": "Kreisumfang",
+    "geo-triangle-area": "Dreiecksfläche",
+    "geo-sphere-volume": "Kugelvolumen",
+    "geo-cylinder-volume": "Zylindervolumen",
+    "trig-pythagorean-identity": "Trigonometrischer Pythagoras",
+    "trig-tan-identity": "Tangenten-Identität",
+    "trig-sine-rule": "Sinussatz",
+    "trig-cosine-rule": "Kosinussatz",
+    "trig-double-angle-sin": "Doppelwinkelformel (Sinus)",
+    "trig-double-angle-cos": "Doppelwinkelformel (Kosinus)",
+    "derivative-power": "Potenzregel",
+    "derivative-product": "Produktregel",
+    "derivative-quotient": "Quotientenregel",
+    "derivative-chain": "Kettenregel",
+    "derivative-sin": "Ableitung von Sinus",
+    "derivative-ln": "Ableitung von ln(x)",
+    "integral-power": "Potenzregel der Integration",
+    "integral-by-parts": "Partielle Integration",
+    "integral-substitution": "Integration durch Substitution",
+    "integral-fundamental-theorem": "Hauptsatz der Differential- und Integralrechnung",
+    "integral-definite": "Bestimmtes Integral",
+    "integral-exponential": "Integral der Exponentialfunktion"
+  },
+  "formulaCard": {
+    "renderError": "Formel konnte nicht gerendert werden",
+    "copyWord": "Für Word kopieren",
+    "edit": "Bearbeiten"
+  },
+  "theme": {
+    "switchToLight": "Zum Hellmodus wechseln",
+    "switchToDark": "Zum Dunkelmodus wechseln",
+    "light": "Hellmodus",
+    "dark": "Dunkelmodus"
+  },
+  "howItWorks": {
+    "meta": {
+      "title": "So funktioniert’s — FormulaConvert",
+      "description": "Erfahren Sie, wie FormulaConvert LaTeX in Word-taugliches MathML verwandelt."
+    },
+    "badge": "Überblick",
+    "title": "So funktioniert’s",
+    "intro": "FormulaConvert wandelt LaTeX in Word-taugliches MathML und organisiert Ihre Formeln — für Studium, Forschung und technische Texte.",
+    "stepLabel": "Schritt {step}",
+    "steps": {
+      "1": {
+        "title": "Schreiben oder browsen",
+        "description": "Nutzen Sie den Formel-Arbeitsbereich, scannen Sie mit KI oder wählen Sie aus der Formelbibliothek."
+      },
+      "2": {
+        "title": "Für Word konvertieren",
+        "description": "Kopieren Sie MathML für Microsoft Word. Einfügen im Dokument — Word behandelt es als bearbeitbare Gleichung."
+      },
+      "3": {
+        "title": "Speichern und verwalten",
+        "description": "Melden Sie sich an, um Formeln zu speichern. Suchen, bearbeiten, kopieren oder löschen in „Meine Bibliothek“."
+      }
+    },
+    "ctaTitle": "Jetzt ausprobieren?",
+    "openLiveEditor": "Live-Editor öffnen",
+    "goMyLibrary": "Zu Meine Bibliothek"
+  },
+  "myLibraryPage": {
+    "meta": {
+      "title": "Meine Bibliothek — FormulaConvert",
+      "description": "Ihre gespeicherten LaTeX-Formeln."
+    },
+    "badge": "Arbeitsbereich",
+    "title": "Meine Bibliothek",
+    "description": "Suchen, kopieren, bearbeiten oder löschen Sie gespeicherte Formeln. Zurück in den Live-Editor mit einem Klick.",
+    "openLiveEditor": "Live-Editor öffnen",
+    "loadErrorFallback": "Formeln konnten nicht geladen werden."
+  },
+  "myLibraryGrid": {
+    "savedAt": "Gespeichert {date}",
+    "cantDisplay": "Formel kann nicht angezeigt werden",
+    "copyTitle": "Für Word kopieren",
+    "copyAria": "Für Word kopieren",
+    "editTitle": "Im Live-Editor bearbeiten",
+    "editAria": "Im Live-Editor bearbeiten",
+    "deleteTitle": "Formel löschen",
+    "deleteAria": "Formel löschen",
+    "searchPlaceholder": "Nach Titel oder LaTeX suchen…",
+    "formulaOne": "Formel",
+    "formulaMany": "Formeln",
+    "shownOf": "{shown} von {total} angezeigt",
+    "emptyTitle": "Noch keine gespeicherten Formeln",
+    "emptyHint": "Speichern Sie eine Formel im Live-Editor — sie erscheint hier.",
+    "noSearchMatch": "Keine Treffer für Ihre Suche.",
+    "clearSearch": "Suche zurücksetzen",
+    "deleteConfirm": "Diese Formel aus der Bibliothek löschen? Das kann nicht rückgängig gemacht werden.",
+    "toast": {
+      "copyWordSuccess": "Kopiert! In Word einfügen ✅",
+      "copyFailed": "Kopieren fehlgeschlagen.",
+      "deleted": "Formel gelöscht.",
+      "deleteFailed": "Formel konnte nicht gelöscht werden."
+    }
+  }
+}

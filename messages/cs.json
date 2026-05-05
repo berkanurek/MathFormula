@@ -1,0 +1,296 @@
+{
+  "metadata": {
+    "title": "MathFormula",
+    "description": "Konvertor vzorců LaTeX do Wordu a knihovna"
+  },
+  "common": {
+    "cancel": "Zrušit",
+    "email": "E-mail",
+    "password": "Heslo",
+    "saving": "Ukládání…",
+    "save": "Uložit",
+    "untitledFormula": "Nepojmenovaný vzorec"
+  },
+  "header": {
+    "brand": "FormulaConvert",
+    "nav": {
+      "liveEditor": "Živý editor",
+      "myLibrary": "Moje knihovna",
+      "howItWorks": "Jak to funguje"
+    },
+    "accountMenu": "Menu účtu",
+    "signIn": "Přihlásit se",
+    "signUp": "Registrace",
+    "signOut": "Odhlásit se",
+    "auth": {
+      "signInTitle": "Přihlášení",
+      "signUpTitle": "Registrace",
+      "signInSubmit": "Přihlásit se",
+      "signUpSubmit": "Registrovat se"
+    },
+    "toast": {
+      "emailPasswordRequired": "Vyplňte e-mail a heslo.",
+      "signedIn": "Úspěšně přihlášeni.",
+      "signUpSuccess": "Registrace proběhla. Zkontrolujte e-mail pro ověření.",
+      "authFailed": "Ověření se nezdařilo.",
+      "signedOut": "Odhlášeni.",
+      "signOutFailed": "Odhlášení se nezdařilo."
+    },
+    "language": {
+      "label": "Jazyk",
+      "en": "English",
+      "de": "Deutsch",
+      "cs": "Čeština"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 FormulaConvert. Pro akademickou excelenci.",
+    "privacy": "Ochrana soukromí",
+    "terms": "Podmínky služby",
+    "contact": "Kontaktovat podporu",
+    "docs": "Dokumentace"
+  },
+  "home": {
+    "hero": {
+      "title": "Převeďte matematiku do Wordu okamžitě",
+      "subtitle": "Pište, prohlížejte nebo skenujte vzorce pomocí AI. Pracovní prostor pro LaTeX, MathML a profesionální exporty."
+    },
+    "workspaceTab": "Živý editor"
+  },
+  "workspace": {
+    "ariaWorkspace": "Pracovní prostor pro vzorce",
+    "howToUseAria": "Jak používat pracovní prostor",
+    "howToUseTitle": "Návod",
+    "howToUseBody": "Naskenovat obrázek — Nahrajte nebo vložte snímek; AI přepíše vzorec do LaTeXu (s záložní službou, pokud je hlavní API zaneprázdněné).\nVypočítat — Číselný výsledek výrazu, nebo po zadání rovnice se znakem = (např. x^2+2x+1=0) zobrazí řešení.\nKopírovat do Wordu — Zkopíruje MathML pro vložení do Microsoft Wordu.",
+    "title": "Pracovní prostor",
+    "status": {
+      "empty": {
+        "label": "Prázdné",
+        "detail": "Přidejte vzorec"
+      },
+      "invalid": {
+        "label": "Vyžaduje pozornost",
+        "detail": "Problém se syntaxí"
+      },
+      "ready": {
+        "label": "Hotovo",
+        "detail": "Synchronizováno · MathML OK"
+      }
+    },
+    "toolbar": {
+      "undo": "Zpět",
+      "redo": "Znovu",
+      "clear": "Vymazat"
+    },
+    "ocrLoading": {
+      "title": "AI rozkládá váš vzorec…",
+      "subtitle": "Obvykle to trvá jen pár sekund."
+    },
+    "copyWord": "Kopírovat do Wordu",
+    "saveToLibrary": "Uložit do knihovny",
+    "scanImage": "Naskenovat obrázek",
+    "scanImageHint": "Nahrajte nebo vložte snímek obrazovky; AI extrahuje LaTeX",
+    "calculate": "Vypočítat",
+    "calculateAria": "Vypočítat číselný výsledek",
+    "closeVirtualKeyboard": "Zavřít klávesnici",
+    "resultLabel": "Výsledek",
+    "solutionLabel": "Řešení",
+    "resultSymbolic": "Detekován symbolický výraz. Zadejte číselné hodnoty.",
+    "equationNoSolutions": "Řešení neexistuje.",
+    "export": {
+      "section": "Export",
+      "svgAria": "Stáhnout SVG",
+      "svgTitle": "SVG — vektorový obrázek",
+      "pngAria": "Stáhnout PNG",
+      "pngTitle": "PNG — rastr s průhledností",
+      "pdfAria": "Stáhnout PDF",
+      "pdfTitle": "PDF — jednostránkový dokument",
+      "copyRawAria": "Kopírovat surový LaTeX",
+      "copyRawTitle": "Kopírovat zdroj LaTeX"
+    },
+    "footnote": "Kopírování do Wordu používá MathML. Souborové exporty zachycují zobrazení MathLive.",
+    "saveModal": {
+      "title": "Uložit vzorec",
+      "description": "Zadejte vlastní název tohoto vzorce.",
+      "placeholder": "Např.: řetězové pravidlo"
+    },
+    "ocrModal": {
+      "title": "Naskenovat vzorec z obrázku",
+      "hintBefore": "Přetáhněte soubor, klikněte pro nahrání nebo stiskněte",
+      "hintAfter": "pro vložení snímku obrazovky.",
+      "keyCtrl": "Ctrl",
+      "keyV": "V",
+      "dropzone": "Klikněte pro výběr obrázku nebo jej přetáhněte",
+      "pasteNote": "Vkládání funguje, když je tento dialog otevřený"
+    },
+    "toast": {
+      "ocrSuccess": "Vzorec byl extrahován z obrázku.",
+      "ocrReadFailed": "Ze obrázku se nepodařilo vzorec přečíst.",
+      "ocrRequestFailed": "Požadavek OCR selhal.",
+      "ocrNoLatex": "V odpovědi chybí LaTeX.",
+      "fileReadFailed": "Soubor nelze přečíst.",
+      "ocrInvalidFile": "Vložte nebo nahrajte obrázek.",
+      "ocrTooLarge": "Obrázek je příliš velký (max. cca 4 MB). Zkuste menší snímek.",
+      "signInToSave": "Pro ukládání vzorců se přihlaste.",
+      "enterFormula": "Před uložením zadejte vzorec.",
+      "titleRequired": "Zadejte název.",
+      "supabaseMissing": "Supabase není nakonfigurováno.",
+      "sessionExpired": "Platnost relace vypršela. Přihlaste se znovu.",
+      "saveNotConfirmed": "Uložení nebylo databází potvrzeno.",
+      "saveSuccess": "Vzorec byl uložen.",
+      "saveFailed": "Vzorec se nepodařilo uložit.",
+      "signInFirst": "Nejprve se přihlaste.",
+      "addBeforeExport": "Před exportem přidejte vzorec.",
+      "exportDownloaded": "{format} staženo.",
+      "exportFailed": "Export {format} selhal. Zkuste to znovu.",
+      "latexCopied": "LaTeX zkopírován.",
+      "latexCopyFailed": "LaTeX se nepodařilo zkopírovat.",
+      "copyWordSuccess": "Zkopírováno! Vložte do Wordu ✅",
+      "copyFailed": "Kopírování selhalo.",
+      "rawLatexCopied": "Surový LaTeX zkopírován.",
+      "calcEmpty": "Pro výpočet zadejte vzorec.",
+      "calcSyntax": "Výraz se nepodařilo zpracovat.",
+      "calcZerodiv": "Dělení nulou.",
+      "calcDomain": "Neplatná hodnota pro tento výraz."
+    }
+  },
+  "latexSource": {
+    "title": "Zdroj LaTeX",
+    "show": "Zobrazit",
+    "hide": "Skrýt",
+    "copyTitle": "Kopírovat LaTeX"
+  },
+  "library": {
+    "title": "Knihovna vzorců",
+    "subtitle": "Rychlý přístup k běžným matematickým výrazům.",
+    "viewAll": "Zobrazit vše",
+    "showLess": "Méně",
+    "searchPlaceholder": "Hledat vzorce… (např. Pythagoras, derivace)",
+    "loadingMyLibrary": "Načítání Moje knihovna…",
+    "noMatch": "Žádný vzorec neodpovídá hledání.",
+    "signInForMyLibrary": "Pro přístup ke knihovně se přihlaste.",
+    "loadFailed": "Knihovnu se nepodařilo načíst.",
+    "filters": {
+      "all": "Vše",
+      "my-library": "Moje knihovna",
+      "algebra": "Algebra",
+      "geometry": "Geometrie",
+      "trigonometry": "Goniometrie",
+      "derivatives": "Derivace",
+      "integrals": "Integrály"
+    }
+  },
+  "Formulas": {
+    "categories": {
+      "algebra": "Algebra",
+      "geometry": "Geometrie",
+      "trigonometry": "Goniometrie",
+      "derivatives": "Derivace",
+      "integrals": "Integrály"
+    },
+    "alg-quadratic": "Kvadratický vzorec",
+    "alg-difference-squares": "Rozdíl druhých mocnin",
+    "alg-binomial-2": "Binomická věta (druhá mocnina)",
+    "alg-log-product": "Pravidlo pro logaritmus součinu",
+    "alg-log-quotient": "Pravidlo pro logaritmus podílu",
+    "alg-exp-product": "Pravidlo pro součin mocnin",
+    "geo-pythagorean": "Pythagorova věta",
+    "geo-circle-area": "Obsah kruhu",
+    "geo-circle-circumference": "Obvod kruhu",
+    "geo-triangle-area": "Obsah trojúhelníku",
+    "geo-sphere-volume": "Objem koule",
+    "geo-cylinder-volume": "Objem válce",
+    "trig-pythagorean-identity": "Goniometrická identita",
+    "trig-tan-identity": "Identita pro tangens",
+    "trig-sine-rule": "Sinová věta",
+    "trig-cosine-rule": "Kosinová věta",
+    "trig-double-angle-sin": "Dvojnásobný úhel (sinus)",
+    "trig-double-angle-cos": "Dvojnásobný úhel (kosinus)",
+    "derivative-power": "Pravidlo pro mocninu",
+    "derivative-product": "Pravidlo pro součin",
+    "derivative-quotient": "Pravidlo pro podíl",
+    "derivative-chain": "Řetězové pravidlo",
+    "derivative-sin": "Derivace sinu",
+    "derivative-ln": "Derivace ln(x)",
+    "integral-power": "Integrál mocninné funkce",
+    "integral-by-parts": "Integrace per partes",
+    "integral-substitution": "Substituce",
+    "integral-fundamental-theorem": "Základní věta integrálního počtu",
+    "integral-definite": "Určitý integrál",
+    "integral-exponential": "Integrál exponenciály"
+  },
+  "formulaCard": {
+    "renderError": "Vzorec se nepodařilo vykreslit",
+    "copyWord": "Kopírovat do Wordu",
+    "edit": "Upravit"
+  },
+  "theme": {
+    "switchToLight": "Přepnout na světlý režim",
+    "switchToDark": "Přepnout na tmavý režim",
+    "light": "Světlý režim",
+    "dark": "Tmavý režim"
+  },
+  "howItWorks": {
+    "meta": {
+      "title": "Jak to funguje — FormulaConvert",
+      "description": "Zjistěte, jak FormulaConvert převádí LaTeX na MathML pro Word."
+    },
+    "badge": "Přehled",
+    "title": "Jak to funguje",
+    "intro": "FormulaConvert mění LaTeX na MathML pro Word a drží vaše vzorce přehledně — pro studium, výzkum a technickou dokumentaci.",
+    "stepLabel": "Krok {step}",
+    "steps": {
+      "1": {
+        "title": "Psát nebo prohlížet",
+        "description": "Použijte pracovní prostor, skenujte vzorce pomocí AI nebo vybírejte z knihovny."
+      },
+      "2": {
+        "title": "Převést do Wordu",
+        "description": "Až budete připraveni, zkopírujte MathML pro Microsoft Word. Po vložení je rovnice editovatelná."
+      },
+      "3": {
+        "title": "Ukládat a spravovat",
+        "description": "Přihlaste se a ukládejte vlastní vzorce. Hledejte, upravujte, kopírujte nebo mažte v Moje knihovna."
+      }
+    },
+    "ctaTitle": "Chcete to vyzkoušet?",
+    "openLiveEditor": "Otevřít živý editor",
+    "goMyLibrary": "Přejít do Moje knihovna"
+  },
+  "myLibraryPage": {
+    "meta": {
+      "title": "Moje knihovna — FormulaConvert",
+      "description": "Vaše uložené vzorce LaTeX."
+    },
+    "badge": "Pracovní prostor",
+    "title": "Moje knihovna",
+    "description": "Hledejte, kopírujte, upravujte nebo mažte uložené vzorce. Pošlete je zpět do živého editoru jedním kliknutím.",
+    "openLiveEditor": "Otevřít živý editor",
+    "loadErrorFallback": "Vzorce se nepodařilo načíst."
+  },
+  "myLibraryGrid": {
+    "savedAt": "Uloženo {date}",
+    "cantDisplay": "Vzorec nelze zobrazit",
+    "copyTitle": "Kopírovat do Wordu",
+    "copyAria": "Kopírovat do Wordu",
+    "editTitle": "Upravit v živém editoru",
+    "editAria": "Upravit v živém editoru",
+    "deleteTitle": "Smazat vzorec",
+    "deleteAria": "Smazat vzorec",
+    "searchPlaceholder": "Hledat podle názvu nebo LaTeX…",
+    "formulaOne": "vzorec",
+    "formulaMany": "vzorců",
+    "shownOf": "Zobrazeno {shown} z {total}",
+    "emptyTitle": "Zatím žádné uložené vzorce",
+    "emptyHint": "Uložte vzorec v živém editoru a objeví se zde.",
+    "noSearchMatch": "Hledání nic nenašlo.",
+    "clearSearch": "Vymazat hledání",
+    "deleteConfirm": "Smazat tento vzorec z knihovny? Tuto akci nelze vrátit.",
+    "toast": {
+      "copyWordSuccess": "Zkopírováno! Vložte do Wordu ✅",
+      "copyFailed": "Kopírování selhalo.",
+      "deleted": "Vzorec smazán.",
+      "deleteFailed": "Vzorec se nepodařilo smazat."
+    }
+  }
+}

@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-inter), Inter, system-ui, -apple-system, Segoe UI, Roboto,
+    Arial, sans-serif;
+}
+
+@layer base {
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"] {
+    touch-action: manipulation;
+  }
+
+  /* Custom elements & tap surfaces (MathLive, OCR drop zones) */
+  math-field,
+  .visual-math-field {
+    touch-action: manipulation;
+  }
+}
+
+.math-font {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+}
+
+/* MathLive (WYSIWYG) — Minimalist-Corporate, primary tint */
+.visual-math-field {
+  --hue: 238;
+  --primary: 70 70% 55%;
+  display: block;
+  width: 100%;
+}
+
+.visual-math-field::part(menu-toggle) {
+  display: none;
+}
+
+/* KaTeX formula display (library cards) — readable on dark backgrounds */
+.dark .katex-formula-wrap .katex,
+.dark .katex-formula-wrap .katex * {
+  color: #e2e8f0 !important;
+}
+
+.dark .katex-formula-wrap .katex .mord,
+.dark .katex-formula-wrap .katex .mrel,
+.dark .katex-formula-wrap .katex .mbin {
+  color: inherit !important;
+}
+
+/* MathLive field — dark theme contrast */
+.dark math-field.visual-math-field {
+  color: #f1f5f9 !important;
+  background-color: rgb(15 23 42) !important;
+  caret-color: #a5b4fc;
+}
+
+.dark math-field.visual-math-field:focus-within {
+  outline-color: rgb(99 102 241 / 0.5);
+}
+
+/* ---- MathLive virtual keyboard — glass toolbar & native-style chrome ---- */
+body > .ML__keyboard {
+  --keyboard-accent-color: rgb(99 102 241);
+  --vk-toolbar-bg: rgba(25, 25, 25, 0.8);
+  --vk-toolbar-divider: rgba(255, 255, 255, 0.1);
+}
+
+body > .ML__keyboard.is-visible > .MLK__backdrop {
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 -6px 28px rgba(0, 0, 0, 0.14),
+    0 -16px 48px rgba(0, 0, 0, 0.18);
+}
+
+body > .ML__keyboard.is-visible > .MLK__backdrop > .MLK__plate {
+  border-radius: 12px 12px 0 0;
+}
+
+.MLK__toolbar {
+  background: var(--vk-toolbar-bg) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--vk-toolbar-divider) !important;
+  border-radius: 12px 12px 0 0;
+  padding: 10px 12px 12px !important;
+  max-width: none !important;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.MLK__toolbar > .left {
+  gap: 2px;
+}
+
+/* Layout tabs — compact, uppercase (123 / abc / αβγ) */
+.MLK__toolbar > .left > div.layer-switch,
+.MLK__toolbar > .left > div.selected {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  padding: 8px 12px 12px !important;
+  margin: 0 2px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255, 255, 255, 0.52) !important;
+}
+
+.MLK__toolbar > .left > div.selected {
+  color: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: none !important;
+  padding-bottom: 12px !important;
+  margin-bottom: 0 !important;
+  position: relative;
+}
+
+.MLK__toolbar > .left > div.selected::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+  width: min(72%, 52px);
+  height: 3px;
+  border-radius: 999px;
+  background: var(--keyboard-accent-color);
+}
+
+.MLK__toolbar .ML__edit-toolbar.right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  /* Room for absolutely positioned dismiss on .MLK__plate (top-right) */
+  padding-right: 52px;
+}
+
+.MLK__toolbar .ML__edit-toolbar.right > div.action {
+  color: rgba(255, 255, 255, 0.88);
+  background: transparent !important;
+  border-radius: 999px;
+  min-width: 40px;
+  min-height: 36px;
+}
+
+.MLK__toolbar .ML__edit-toolbar.right > div.action:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Dismiss (X) — one node on .MLK__plate, persists across 123 / abc / αβγ layer tabs */
+body > .ML__keyboard.is-visible .MLK__backdrop > .MLK__plate {
+  position: relative;
+}
+
+button.ml-vk-dismiss-btn.ml-vk-dismiss-plate {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 50;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button.ml-vk-dismiss-btn.ml-vk-dismiss-plate svg {
+  display: block;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+}
+
+button.ml-vk-dismiss-btn.ml-vk-dismiss-plate:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+button.ml-vk-dismiss-btn.ml-vk-dismiss-plate:focus-visible {
+  outline: 2px solid rgb(99 102 241);
+  outline-offset: 2px;
+}
