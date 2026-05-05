@@ -23,6 +23,8 @@ export default function RootLayout({
       <head>
         {/* Material Symbols — loaded from Google Fonts CDN (not bundled in next/font). */}
         {/* eslint-disable-next-line @next/next/no-page-custom-font -- icon font; Inter uses next/font above */}
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap"
           rel="stylesheet"
