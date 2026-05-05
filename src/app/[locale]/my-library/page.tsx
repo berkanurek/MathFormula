@@ -1,6 +1,6 @@
 import { MyLibraryDashboard } from "@/components/MyLibraryDashboard";
 import { routing } from "@/i18n/routing";
-import { listUserFormulas } from "@/lib/repositories/userFormulas";
+import { fetchFolders, fetchSavedFormulas } from "@/lib/repositories/library";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "@/i18n/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -44,21 +44,35 @@ export default async function MyLibraryPage({ params }: PageProps) {
     namespace: "myLibraryPage",
   });
 
+  let mappedFolders: Array<{
+    id: string;
+    name: string;
+    createdAt: string;
+  }> = [];
   let mappedFormulas: Array<{
     id: string;
-    title: string;
-    latexCode: string;
+    content: string;
+    folderId: string | null;
+    isFavorite: boolean;
     createdAt: string;
   }> = [];
   let loadErrorMessage: string | null = null;
 
   try {
-    const formulas = await listUserFormulas(userId);
-    const safeFormulas = Array.isArray(formulas) ? formulas : [];
-    mappedFormulas = safeFormulas.map((item) => ({
+    const [folders, formulas] = await Promise.all([
+      fetchFolders(userId),
+      fetchSavedFormulas({ userId }),
+    ]);
+    mappedFolders = (Array.isArray(folders) ? folders : []).map((item) => ({
       id: String(item.id),
-      title: String(item.title ?? tCommon("untitledFormula")),
-      latexCode: String(item.latex_code ?? ""),
+      name: String(item.name ?? "Untitled Folder"),
+      createdAt: String(item.created_at ?? new Date(0).toISOString()),
+    }));
+    mappedFormulas = (Array.isArray(formulas) ? formulas : []).map((item) => ({
+      id: String(item.id),
+      content: String(item.content ?? tCommon("untitledFormula")),
+      folderId: item.folder_id ? String(item.folder_id) : null,
+      isFavorite: Boolean(item.is_favorite),
       createdAt: String(item.created_at ?? new Date(0).toISOString()),
     }));
   } catch (error) {
@@ -70,6 +84,7 @@ export default async function MyLibraryPage({ params }: PageProps) {
   return (
     <MyLibraryDashboard
       currentUserId={userId}
+      initialFolders={mappedFolders}
       initialFormulas={mappedFormulas}
       loadErrorMessage={loadErrorMessage}
     />

@@ -480,6 +480,22 @@ export function LiveEditor({
         throw new Error(tToast("saveNotConfirmed"));
       }
 
+      const { error: savedFormulaError } = await supabase
+        .from("saved_formulas")
+        .insert({
+          user_id: user.id,
+          content: latex,
+        });
+      if (savedFormulaError) {
+        console.error("Mirror insert into saved_formulas failed:", {
+          message: savedFormulaError.message,
+          details: savedFormulaError.details,
+          hint: savedFormulaError.hint,
+          code: savedFormulaError.code,
+          userId: user.id,
+        });
+      }
+
       setIsSaveDialogOpen(false);
       setSaveTitle("");
       onToast({ tone: "success", message: tToast("saveSuccess") });

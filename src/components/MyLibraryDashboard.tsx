@@ -5,7 +5,11 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { Link } from "@/i18n/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { MyLibraryGrid, type MyLibraryFormula } from "@/components/MyLibraryGrid";
+import {
+  MyLibraryWorkspace,
+  type LibraryFolder,
+  type LibraryFormula,
+} from "@/components/MyLibraryWorkspace";
 import { Toast } from "@/components/Toast";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
@@ -13,11 +17,13 @@ import { createClient as createSupabaseBrowserClient } from "@/lib/supabase/clie
 
 export function MyLibraryDashboard({
   currentUserId,
+  initialFolders,
   initialFormulas,
   loadErrorMessage,
 }: {
   currentUserId: string;
-  initialFormulas: MyLibraryFormula[];
+  initialFolders: LibraryFolder[];
+  initialFormulas: LibraryFormula[];
   loadErrorMessage: string | null;
 }) {
   const t = useTranslations("myLibraryPage");
@@ -154,8 +160,9 @@ export function MyLibraryDashboard({
                 </p>
               </div>
             ) : (
-              <MyLibraryGrid
+              <MyLibraryWorkspace
                 currentUserId={currentUserId}
+                initialFolders={initialFolders}
                 initialFormulas={initialFormulas}
                 onToast={showToast}
               />
