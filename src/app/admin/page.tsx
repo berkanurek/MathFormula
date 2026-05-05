@@ -147,6 +147,27 @@ export default async function AdminPage() {
           </Table>
         </CardContent>
       </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Advanced Analytics (PostHog)</CardTitle>
+          <CardDescription>Embedded product analytics and session insights.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-hidden rounded-lg">
+            <iframe
+              width="100%"
+              height="600"
+              frameBorder={0}
+              allowFullScreen
+              src="https://eu.posthog.com/embedded/26MFRrjdougDJCbfWN1dyiw3qWvIjg"
+              sandbox="allow-scripts allow-same-origin allow-popups"
+              className="min-h-[600px] w-full rounded-lg border-none"
+              title="PostHog Embedded Analytics"
+            />
+          </div>
+        </CardContent>
+      </Card>
     </main>
   );
 }
