@@ -2,7 +2,7 @@
 
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { MathfieldElement } from "mathlive";
-import { Calculator, Info } from "lucide-react";
+import { AlertCircle, Calculator, Clock3, Info, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { copyLatexAsWordMathML, renderLatexToHtmlAndMathml } from "@/lib/latex";
@@ -18,6 +18,8 @@ import { LatexSourceDisclosure } from "@/components/LatexSourceDisclosure";
 import { useIsNarrowViewport } from "@/hooks/useMatchMedia";
 
 const VK_DISMISS_BTN_ID = "mathformula-vk-dismiss";
+const HISTORY_STORAGE_KEY = "mathformula_history";
+const MAX_HISTORY_ITEMS = 5;
 
 /**
  * Mount dismiss on `.MLK__plate` (shared by all keyboard layers). Runs only in the browser via
@@ -91,6 +93,46 @@ function normalizeOcrImageForApi(
   };
 }
 
+function formatResultToLatex(value: string): string {
+  let latex = value
+    .trim()
+    .replace(/×/g, "*")
+    .replace(/÷/g, "/")
+    .replace(/log_([a-zA-Z0-9]+)/g, "\\log_$1")
+    .replace(/\bpi\b/gi, "\\pi")
+    .replace(/\btheta\b/gi, "\\theta");
+
+  // Normalize powers: ^2 -> ^{2}, ^(-1) -> ^{-1}
+  latex = latex
+    .replace(/\^\(([^()]+)\)/g, "^{$1}")
+    .replace(/\^(-?\d+(?:\.\d+)?)/g, "^{$1}")
+    .replace(/\^([a-zA-Z])/g, "^{$1}");
+
+  // Convert simple divisions to fractions.
+  for (let i = 0; i < 3; i += 1) {
+    const next = latex.replace(
+      /(\([^()]+\)|[a-zA-Z0-9.+-]+)\s*\/\s*(\([^()]+\)|[a-zA-Z0-9.+-]+)/g,
+      (_match, numerator: string, denominator: string) => {
+        const num = numerator.replace(/^\((.*)\)$/, "$1");
+        const den = denominator.replace(/^\((.*)\)$/, "$1");
+        return `\\frac{${num}}{${den}}`;
+      },
+    );
+    if (next === latex) break;
+    latex = next;
+  }
+
+  latex = latex
+    .replace(/\*/g, " \\cdot ")
+    // Cleaner variable multiplication: xy instead of x \cdot y
+    .replace(/([a-zA-Z}\\])\s*\\cdot\s*([a-zA-Z\\{])/g, "$1 $2")
+    // Dynamic parentheses for better visual scaling.
+    .replace(/\(/g, "\\left(")
+    .replace(/\)/g, "\\right)");
+
+  return latex;
+}
+
 export function LiveEditor({
   latex,
   onLatexChange,
@@ -129,12 +171,26 @@ export function LiveEditor({
   const [isOcrModalOpen, setIsOcrModalOpen] = useState(false);
   const [isOcrLoading, setIsOcrLoading] = useState(false);
   const [isHowToOpen, setIsHowToOpen] = useState(false);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(true);
+  const [recentHistory, setRecentHistory] = useState<string[]>([]);
+  const [activeHistoryFormula, setActiveHistoryFormula] = useState<string | null>(null);
   const ocrFileInputRef = useRef<HTMLInputElement | null>(null);
   const ocrDropZoneRef = useRef<HTMLDivElement | null>(null);
   const howToWrapRef = useRef<HTMLDivElement | null>(null);
   const isNarrowViewport = useIsNarrowViewport();
 
   const rendered = useMemo(() => renderLatexToHtmlAndMathml(latex), [latex]);
+  const renderedSolution = useMemo(() => {
+    if (!calcOutcome || calcOutcome.kind === "equation_none" || calcOutcome.kind === "symbolic") {
+      return null;
+    }
+    const latexValue = formatResultToLatex(calcOutcome.value);
+    const renderedMath = renderLatexToHtmlAndMathml(latexValue);
+    return {
+      latexValue,
+      renderedMath,
+    };
+  }, [calcOutcome]);
 
   const status = useMemo(() => {
     if (!latex.trim()) {
@@ -213,6 +269,101 @@ export function LiveEditor({
   }, [latex]);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const raw = window.localStorage.getItem(HISTORY_STORAGE_KEY);
+      if (!raw) {
+        setRecentHistory([]);
+        return;
+      }
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) {
+        setRecentHistory([]);
+        return;
+      }
+      const cleaned = parsed
+        .filter((value): value is string => typeof value === "string")
+        .map((value) => value.trim())
+        .filter(Boolean)
+        .slice(0, MAX_HISTORY_ITEMS);
+      setRecentHistory(cleaned);
+    } catch {
+      setRecentHistory([]);
+    }
+  }, []);
+
+  const persistHistory = useCallback((next: string[]) => {
+    if (typeof window === "undefined") return;
+    try {
+      window.localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      // Ignore storage write errors (private mode/quota).
+    }
+  }, []);
+
+  const addFormulaToHistory = useCallback(
+    (formulaValue: string) => {
+      const normalized = formulaValue.trim();
+      if (!normalized) return;
+      const normalizeForCompare = (value: string) => {
+        if (!value) return "";
+        return value
+          .replace(/[\s\u200B-\u200D\uFEFF]+/g, "")
+          .replace(/\\left\b/g, "")
+          .replace(/\\right\b/g, "")
+          .replace(/[{}]/g, "");
+      };
+      setRecentHistory((prev) => {
+        const nextDraft = [...prev];
+        const existingIndex = nextDraft.findIndex(
+          (item) => normalizeForCompare(item) === normalizeForCompare(normalized),
+        );
+        if (existingIndex >= 0) {
+          nextDraft.splice(existingIndex, 1);
+        }
+        nextDraft.unshift(normalized);
+        const next = nextDraft.slice(0, MAX_HISTORY_ITEMS);
+        persistHistory(next);
+        return next;
+      });
+    },
+    [persistHistory],
+  );
+
+  const clearRecentHistory = useCallback(() => {
+    setRecentHistory([]);
+    persistHistory([]);
+  }, [persistHistory]);
+
+  const removeHistoryItem = useCallback(
+    (formulaValue: string) => {
+      setRecentHistory((prev) => {
+        const next = prev.filter((item) => item !== formulaValue);
+        persistHistory(next);
+        return next;
+      });
+    },
+    [persistHistory],
+  );
+
+  const loadFormulaFromHistory = useCallback(
+    (formulaValue: string) => {
+      onLatexChange(formulaValue);
+      addFormulaToHistory(formulaValue);
+      setActiveHistoryFormula(formulaValue);
+      mathFieldRef.current?.focus();
+      if (typeof window !== "undefined") {
+        window.setTimeout(() => {
+          setActiveHistoryFormula((current) =>
+            current === formulaValue ? null : current,
+          );
+        }, 550);
+      }
+    },
+    [addFormulaToHistory, onLatexChange],
+  );
+
+  useEffect(() => {
     if (!isHowToOpen) return;
     const close = (e: MouseEvent) => {
       if (!howToWrapRef.current?.contains(e.target as Node)) {
@@ -263,6 +414,7 @@ export function LiveEditor({
           ? { kind: "solution", value: out.display }
           : { kind: "numeric", value: out.display },
       );
+      addFormulaToHistory(trimmed);
       void trackActivity("generated_formula");
       return;
     }
@@ -285,7 +437,7 @@ export function LiveEditor({
         setCalcOutcome(null);
         onToast({ tone: "error", message: tToast("calcSyntax") });
     }
-  }, [latex, onToast, tToast, trackActivity]);
+  }, [addFormulaToHistory, latex, onToast, tToast, trackActivity]);
 
   const runOcrRequest = useCallback(
     async (imageBase64: string, mimeType: string) => {
@@ -320,7 +472,9 @@ export function LiveEditor({
       if (!data.latex?.trim()) {
         throw new Error(tToast("ocrNoLatex"));
       }
-      onLatexChange(data.latex.trim());
+      const extractedLatex = data.latex.trim();
+      onLatexChange(extractedLatex);
+      addFormulaToHistory(extractedLatex);
       void trackActivity("scanned_image");
       onOcrComplete?.();
       onToast({
@@ -328,7 +482,7 @@ export function LiveEditor({
         message: tToast("ocrSuccess"),
       });
     },
-    [onLatexChange, onOcrComplete, onToast, tToast, trackActivity],
+    [addFormulaToHistory, onLatexChange, onOcrComplete, onToast, tToast, trackActivity],
   );
 
   const MAX_OCR_FILE_BYTES = 12 * 1024 * 1024;
@@ -679,73 +833,235 @@ export function LiveEditor({
             >
               <span className="material-symbols-outlined text-[22px]">delete</span>
             </button>
+            <button
+              className={`${iconHitClass} border border-slate-200/70 bg-white/80 text-slate-600 hover:bg-slate-100 hover:text-primary dark:border-slate-700 dark:bg-slate-950/60 dark:text-slate-300 dark:hover:bg-slate-800`}
+              title="Toggle history panel"
+              type="button"
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => setIsHistoryOpen((open) => !open)}
+            >
+              <Clock3 className="h-5 w-5" strokeWidth={2} aria-hidden />
+            </button>
           </div>
         </header>
 
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col space-y-md px-4 pb-md pt-4 md:px-gutter md:pt-lg">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col px-4 pb-md pt-4 md:px-gutter md:pt-lg">
           {isNarrowViewport ? (
-            <p className="m-0 font-body-sm text-body-sm text-slate-600 dark:text-slate-400">
+            <p className="mb-md font-body-sm text-body-sm text-slate-600 dark:text-slate-400">
               {t("mobileKeyboardHint")}
             </p>
           ) : null}
-          <div className="min-w-0 max-w-full overflow-x-auto">
-            <VisualMathField
-              ref={mathFieldRef}
-              id="latex-input"
-              value={latex}
-              onChange={onLatexChange}
-              className="visual-math-field min-h-[300px] w-full min-w-0 flex-1 rounded-lg border border-slate-200/90 bg-white p-md text-body-md leading-relaxed text-slate-900 shadow-inner focus-within:border-primary focus-within:ring-2 focus-within:ring-primary dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 sm:min-h-[380px] sm:p-lg lg:min-h-[420px]"
-            />
-          </div>
-          <LatexSourceDisclosure
-            latex={latex}
-            onCopy={async () => {
-              try {
-                await navigator.clipboard.writeText(latex || "");
-                onToast({
-                  tone: "success",
-                  message: tToast("latexCopied"),
-                });
-              } catch {
-                onToast({
-                  tone: "error",
-                  message: tToast("latexCopyFailed"),
-                });
-              }
-            }}
-          />
-          {calcOutcome ? (
-            <div
-              className="rounded-lg bg-primary/10 p-4 font-mono text-primary dark:bg-primary/15 dark:text-primary"
-              role="status"
-              aria-live="polite"
-            >
-              {calcOutcome.kind === "numeric" ? (
-                <p className="m-0 text-base leading-relaxed">
-                  <span className="mr-2 font-sans text-sm font-medium text-primary/90">
-                    {t("resultLabel")}:
-                  </span>
-                  {calcOutcome.value}
-                </p>
-              ) : calcOutcome.kind === "solution" ? (
-                <p className="m-0 text-base leading-relaxed">
-                  <span className="mr-2 font-sans text-sm font-medium text-primary/90">
-                    {t("solutionLabel")}:
-                  </span>
-                  {calcOutcome.value}
-                </p>
-              ) : calcOutcome.kind === "equation_none" ? (
-                <p className="m-0 font-sans text-sm font-normal leading-relaxed">
-                  {t("equationNoSolutions")}
+          <div className="flex h-[400px] min-w-0 items-stretch gap-md">
+            <div className="flex h-full min-h-0 min-w-0 flex-1 overflow-x-auto">
+              <VisualMathField
+                ref={mathFieldRef}
+                id="latex-input"
+                value={latex}
+                onChange={onLatexChange}
+                className="visual-math-field h-full w-full min-w-0 flex-1 rounded-lg border border-slate-200/90 bg-white p-md text-body-md leading-relaxed text-slate-900 shadow-inner focus-within:border-primary focus-within:ring-2 focus-within:ring-primary dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 sm:p-lg"
+              />
+            </div>
+          <aside
+            className={`hidden md:flex md:shrink-0 md:self-start md:flex-col md:h-full md:overflow-hidden md:rounded-lg md:border-l md:border-slate-200/90 md:bg-white/75 md:backdrop-blur-sm dark:md:border-slate-700 dark:md:bg-slate-950/50 transition-all duration-300 ${
+              isHistoryOpen
+                ? "md:w-80 md:opacity-100 md:p-sm"
+                : "md:w-0 md:opacity-0 md:p-0 md:pointer-events-none md:border-l-0"
+            }`}
+            aria-label="Recent history panel"
+          >
+            <div className="flex-none flex items-center justify-between border-b border-slate-200/80 pb-2 dark:border-slate-700/80">
+              <h3 className="font-h3 text-sm font-semibold text-slate-900 dark:text-slate-100">
+                Recent Activity
+              </h3>
+              <button
+                type="button"
+                className="rounded-md px-2 py-1 text-xs text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+                onClick={clearRecentHistory}
+              >
+                Clear All
+              </button>
+            </div>
+
+            <div className="mt-2 min-h-0 flex-1 overflow-y-auto pr-2 [scrollbar-width:thin] [scrollbar-color:rgba(148,163,184,0.7)_transparent] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 dark:[&::-webkit-scrollbar-thumb]:bg-slate-600">
+              <div className="space-y-2">
+              {recentHistory.length === 0 ? (
+                <p className="rounded-lg border border-dashed border-slate-300 px-3 py-4 text-center font-body-sm text-xs text-slate-500 dark:border-slate-700 dark:text-slate-400">
+                  No recent history.
                 </p>
               ) : (
-                <p className="m-0 font-sans text-sm font-normal leading-relaxed">
-                  {t("resultSymbolic")}
+                recentHistory.map((entry) => {
+                  const renderedEntry = renderLatexToHtmlAndMathml(entry);
+                  return (
+                    <div
+                      key={entry}
+                      className="group rounded-lg border border-slate-200 bg-white p-2 shadow-sm transition-colors hover:border-primary/50 dark:border-slate-700 dark:bg-slate-900"
+                    >
+                      <div className="mb-2 flex items-center justify-between gap-2">
+                        <button
+                          type="button"
+                          className="truncate text-left text-xs font-medium text-slate-700 hover:text-primary dark:text-slate-200 dark:hover:text-primary"
+                          onClick={() => loadFormulaFromHistory(entry)}
+                        >
+                          Load formula
+                        </button>
+                        <button
+                          type="button"
+                          className="inline-flex h-5 w-5 items-center justify-center rounded text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                          onClick={() => removeHistoryItem(entry)}
+                          aria-label="Remove history item"
+                        >
+                          <X className="h-3.5 w-3.5" aria-hidden />
+                        </button>
+                      </div>
+                      <button
+                        type="button"
+                        className={`block w-full rounded-md border px-2 py-2 text-left transition-all ${
+                          activeHistoryFormula === entry
+                            ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(99,102,241,0.25)]"
+                            : "border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-950/70"
+                        }`}
+                        onClick={() => loadFormulaFromHistory(entry)}
+                      >
+                        {renderedEntry.ok ? (
+                          <div className="relative">
+                            <div
+                              className="katex-formula-wrap max-w-full overflow-x-auto overflow-y-hidden pb-1 text-slate-800 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dark:text-slate-100"
+                              dangerouslySetInnerHTML={{ __html: renderedEntry.html }}
+                            />
+                            <span
+                              aria-hidden
+                              className="pointer-events-none absolute bottom-1 right-0 top-0 w-6 bg-gradient-to-l from-slate-50 to-transparent dark:from-slate-950/70"
+                            />
+                          </div>
+                        ) : (
+                          <span className="text-xs text-slate-500 dark:text-slate-400">
+                            {entry}
+                          </span>
+                        )}
+                      </button>
+                    </div>
+                  );
+                })
+              )}
+              </div>
+            </div>
+          </aside>
+          </div>
+
+          <div className="mt-md space-y-md">
+            <LatexSourceDisclosure
+              latex={latex}
+              onCopy={async () => {
+                try {
+                  await navigator.clipboard.writeText(latex || "");
+                  onToast({
+                    tone: "success",
+                    message: tToast("latexCopied"),
+                  });
+                } catch {
+                  onToast({
+                    tone: "error",
+                    message: tToast("latexCopyFailed"),
+                  });
+                }
+              }}
+            />
+            {calcOutcome ? (
+              <div
+                className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/60"
+                role="status"
+                aria-live="polite"
+              >
+                {calcOutcome.kind === "numeric" ? (
+                  <div className="space-y-3 text-center">
+                    <p className="m-0 text-sm font-medium text-primary">
+                      {t("resultLabel")}:
+                    </p>
+                    {renderedSolution?.renderedMath.ok ? (
+                      <div
+                        className="katex-formula-wrap max-w-full overflow-x-auto pb-1 text-lg text-slate-900 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dark:text-slate-100"
+                        dangerouslySetInnerHTML={{ __html: renderedSolution.renderedMath.html }}
+                      />
+                    ) : (
+                      <p className="m-0 font-mono text-base text-slate-800 dark:text-slate-100">
+                        {calcOutcome.value}
+                      </p>
+                    )}
+                  </div>
+                ) : calcOutcome.kind === "solution" ? (
+                  <div className="space-y-3 text-center">
+                    <p className="m-0 text-sm font-medium text-primary">
+                      {t("solutionLabel")}:
+                    </p>
+                    {renderedSolution?.renderedMath.ok ? (
+                      <div
+                        className="katex-formula-wrap max-w-full overflow-x-auto pb-1 text-lg text-slate-900 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dark:text-slate-100"
+                        dangerouslySetInnerHTML={{ __html: renderedSolution.renderedMath.html }}
+                      />
+                    ) : (
+                      <p className="m-0 font-mono text-base text-slate-800 dark:text-slate-100">
+                        {calcOutcome.value}
+                      </p>
+                    )}
+                  </div>
+                ) : calcOutcome.kind === "equation_none" ? (
+                  <p className="m-0 font-sans text-sm font-normal leading-relaxed">
+                    {t("equationNoSolutions")}
+                  </p>
+                ) : (
+                  <div className="inline-flex max-w-full items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-left dark:border-amber-800/50 dark:bg-amber-900/20">
+                    <AlertCircle
+                      className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-300"
+                      aria-hidden
+                    />
+                    <p className="m-0 font-sans text-sm font-medium leading-relaxed text-amber-800 dark:text-amber-200">
+                      {t("resultSymbolic")}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ) : null}
+          </div>
+        </div>
+
+        {isHistoryOpen ? (
+          <div className="mx-4 mb-md rounded-lg border border-slate-200/90 bg-white/90 p-sm shadow-sm backdrop-blur-sm md:hidden dark:border-slate-700 dark:bg-slate-950/80">
+            <div className="mb-2 flex items-center justify-between border-b border-slate-200/80 pb-2 dark:border-slate-700/80">
+              <h3 className="font-h3 text-sm font-semibold text-slate-900 dark:text-slate-100">
+                Recent Activity
+              </h3>
+              <button
+                type="button"
+                className="rounded-md px-2 py-1 text-xs text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+                onClick={clearRecentHistory}
+              >
+                Clear All
+              </button>
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {recentHistory.length === 0 ? (
+                <p className="w-full rounded-lg border border-dashed border-slate-300 px-3 py-4 text-center font-body-sm text-xs text-slate-500 dark:border-slate-700 dark:text-slate-400">
+                  No recent history.
                 </p>
+              ) : (
+                recentHistory.map((entry) => (
+                  <button
+                    key={`mobile-${entry}`}
+                    type="button"
+                    className={`min-w-[190px] rounded-lg border px-3 py-2 text-left text-xs transition-all ${
+                      activeHistoryFormula === entry
+                        ? "border-primary/70 bg-primary/10 text-primary shadow-[0_0_0_1px_rgba(99,102,241,0.25)]"
+                        : "border-slate-200 bg-slate-50 text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                    }`}
+                    onClick={() => loadFormulaFromHistory(entry)}
+                  >
+                    {entry}
+                  </button>
+                ))
               )}
             </div>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
 
         <footer className="mt-auto shrink-0 border-t border-slate-200/90 bg-slate-50/95 px-4 py-md dark:border-slate-800 dark:bg-slate-950 md:px-gutter md:py-lg">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-sm">
@@ -756,6 +1072,7 @@ export function LiveEditor({
               onClick={async () => {
                 try {
                   await copyLatexAsWordMathML(latex);
+                  addFormulaToHistory(latex);
                   onToast({
                     tone: "success",
                     message: tToast("copyWordSuccess"),
