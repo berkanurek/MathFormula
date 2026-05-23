@@ -6,7 +6,6 @@ import {
   forwardRef,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
   type MutableRefObject,
@@ -20,10 +19,40 @@ type Props = {
   id?: string;
 };
 
-function normalizeForMathField(input: string): string {
+/** LaTeX suitable for KaTeX / React state — always read after MathLive has parsed content. */
+function readLatex(el: MathfieldElement): string {
+  try {
+    const exported = el.getValue("latex");
+    if (exported?.trim()) return exported;
+  } catch {
+    // fall through
+  }
+  return el.value ?? "";
+}
+
+function stripLatexDelimiters(input: string): string {
+  const raw = input.trim();
+  if (raw.startsWith("$$") && raw.endsWith("$$") && raw.length > 4) {
+    return raw.slice(2, -2).trim();
+  }
+  if (raw.startsWith("$") && raw.endsWith("$") && raw.length > 2) {
+    return raw.slice(1, -1).trim();
+  }
+  return raw;
+}
+
+/** True when clipboard text should be handed to MathLive (not plain-text normalized). */
+function isLikelyLatex(input: string): boolean {
+  const s = stripLatexDelimiters(input);
+  if (s.startsWith("\\")) return true;
+  if (/\\[a-zA-Z@]+/.test(s)) return true;
+  return false;
+}
+
+function normalizePlainPasteForMathField(input: string): string {
   const raw = input.trim();
   if (!raw) return raw;
-  if (raw.startsWith("\\")) return raw;
+  if (isLikelyLatex(raw)) return stripLatexDelimiters(raw);
 
   let latex = raw
     .replace(/×/g, "*")
@@ -78,10 +107,11 @@ export const VisualMathField = forwardRef<MathfieldElement, Props>(
     const isNarrow = useIsNarrowViewport();
     const innerRef = useRef<MathfieldElement | null>(null);
     const didSelectAllRef = useRef(false);
-    const normalizedCurrentValue = useMemo(
-      () => normalizeForMathField(value),
-      [value],
-    );
+    const pendingNativePasteFinalizeRef = useRef(false);
+    const lastEmittedLatexRef = useRef(value);
+    const onChangeRef = useRef(onChange);
+    onChangeRef.current = onChange;
+
     const setRefs = useCallback(
       (node: MathfieldElement | null) => {
         innerRef.current = node;
@@ -95,21 +125,55 @@ export const VisualMathField = forwardRef<MathfieldElement, Props>(
       setMounted(true);
     }, []);
 
+    const pushLatexToParent = useCallback((next: string, force = false) => {
+      if (!force && next === lastEmittedLatexRef.current) return;
+      lastEmittedLatexRef.current = next;
+      onChangeRef.current(next);
+    }, []);
+
+    const syncLatexFromElement = useCallback((force = false) => {
+      const el = innerRef.current;
+      if (!el) return;
+      pushLatexToParent(readLatex(el), force);
+    }, [pushLatexToParent]);
+
+    const finalizePasteLikeKeystroke = useCallback(() => {
+      const el = innerRef.current;
+      if (!el) return;
+
+      const run = () => {
+        try {
+          el.executeCommand("commit");
+        } catch {
+          // commit may be unavailable in some contexts
+        }
+
+        const exported = readLatex(el);
+        pushLatexToParent(exported, true);
+
+        el.dispatchEvent(
+          new InputEvent("input", {
+            bubbles: true,
+            composed: true,
+            inputType: "insertFromPaste",
+          }),
+        );
+      };
+
+      run();
+      queueMicrotask(run);
+      requestAnimationFrame(run);
+      window.setTimeout(run, 0);
+      window.setTimeout(run, 50);
+    }, [pushLatexToParent]);
+
     useEffect(() => {
       const el = innerRef.current;
       if (!el) return;
 
       const handleInput = () => {
-        onChange(el.getValue("latex"));
+        syncLatexFromElement();
       };
-
-      el.addEventListener("input", handleInput);
-      return () => el.removeEventListener("input", handleInput);
-    }, [mounted, onChange]);
-
-    useEffect(() => {
-      const el = innerRef.current;
-      if (!el) return;
 
       const handleKeyDown = async (event: KeyboardEvent) => {
         const isPrimaryModifier = event.ctrlKey || event.metaKey;
@@ -127,16 +191,12 @@ export const VisualMathField = forwardRef<MathfieldElement, Props>(
           event.preventDefault();
           try {
             const selected = window.getSelection?.()?.toString().trim();
-            const textToCopy = selected || el.getValue("latex");
+            const textToCopy = selected || readLatex(el);
             await navigator.clipboard.writeText(textToCopy);
           } catch {
-            // Fallback to native behavior if clipboard API is blocked.
             document.execCommand("copy");
           }
-          return;
         }
-
-        if (key === "v") return;
       };
 
       const keepFocus = () => {
@@ -145,40 +205,64 @@ export const VisualMathField = forwardRef<MathfieldElement, Props>(
         }
       };
 
-      const handlePaste = (event: ClipboardEvent) => {
-        event.preventDefault();
+      const handlePasteCapture = (event: ClipboardEvent) => {
         const pasted = event.clipboardData?.getData("text/plain") ?? "";
-        if (!pasted) return;
-        const normalizedPaste = normalizeForMathField(pasted);
+        const hasNonTextPayload = Array.from(event.clipboardData?.types ?? []).some(
+          (type) => type !== "text/plain",
+        );
 
-        // If user just did Ctrl/Cmd+A, replace the full editor content.
-        if (didSelectAllRef.current) {
-          el.setValue(normalizedPaste);
-          didSelectAllRef.current = false;
-        } else {
-          el.executeCommand(["insert", normalizedPaste]);
+        if (!pasted.trim()) {
+          if (hasNonTextPayload) {
+            pendingNativePasteFinalizeRef.current = true;
+          }
+          return;
         }
-        onChange(el.getValue("latex"));
+
+        if (isLikelyLatex(pasted)) {
+          pendingNativePasteFinalizeRef.current = true;
+          return;
+        }
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const normalizedPaste = normalizePlainPasteForMathField(pasted);
+        if (didSelectAllRef.current) {
+          didSelectAllRef.current = false;
+          el.value = normalizedPaste;
+        } else {
+          el.insert(normalizedPaste, { focus: true, mode: "math" });
+        }
+        finalizePasteLikeKeystroke();
       };
 
+      const handlePasteBubble = () => {
+        if (!pendingNativePasteFinalizeRef.current) return;
+        pendingNativePasteFinalizeRef.current = false;
+        finalizePasteLikeKeystroke();
+      };
+
+      el.addEventListener("input", handleInput, { capture: true });
       el.addEventListener("keydown", handleKeyDown);
       el.addEventListener("pointerdown", keepFocus);
-      el.addEventListener("paste", handlePaste);
+      el.addEventListener("paste", handlePasteCapture, { capture: true });
+      el.addEventListener("paste", handlePasteBubble);
       return () => {
+        el.removeEventListener("input", handleInput, { capture: true });
         el.removeEventListener("keydown", handleKeyDown);
         el.removeEventListener("pointerdown", keepFocus);
-        el.removeEventListener("paste", handlePaste);
+        el.removeEventListener("paste", handlePasteCapture, { capture: true });
+        el.removeEventListener("paste", handlePasteBubble);
       };
-    }, [mounted]);
+    }, [mounted, finalizePasteLikeKeystroke, syncLatexFromElement]);
 
     useEffect(() => {
       const el = innerRef.current;
       if (!el) return;
-      const current = el.getValue("latex");
-      if (current !== normalizedCurrentValue) {
-        el.setValue(normalizedCurrentValue);
-      }
-    }, [mounted, normalizedCurrentValue]);
+      if (value === lastEmittedLatexRef.current) return;
+      el.value = value;
+      lastEmittedLatexRef.current = value;
+    }, [mounted, value]);
 
     if (!mounted) {
       return (
