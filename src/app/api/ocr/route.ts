@@ -10,23 +10,23 @@ const USER_IMAGE_PROMPT = "Extract the formula from this image.";
 
 /** Default chain: stable alias first, then explicit names (SDK / regional differences). */
 const DEFAULT_MODEL_CHAIN = [
-  "gemini-1.5-flash-latest",
-  "gemini-1.5-flash",
-  "gemini-2.0-flash",
+  "gemini-flash-latest",
+  "gemini-flash-lite-latest",
+  "gemini-3.1-flash-lite",
+  "gemini-2.5-flash",
 ] as const;
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
 /** Vision models (no :free suffix; OpenRouter routes to available endpoints). */
 const OPENROUTER_MODEL_CHAIN = [
-  "google/gemini-flash-1.5-8b",
-  "meta-llama/llama-3.2-11b-vision-instruct",
-  "qwen/qwen-2-vl-72b-instruct",
-  "microsoft/phi-3.5-vision-instruct",
+  "google/gemini-2.5-flash-lite",
+  "google/gemini-3.5-flash",
+  "microsoft/phi-4-multimodal-instruct",
 ] as const;
 
 const ALL_MODELS_NOT_FOUND_MESSAGE =
-  "API connection successful, but the model ID is invalid. Please check your Google AI Studio project settings.";
+  "None of the Gemini model IDs in DEFAULT_MODEL_CHAIN are available. Update the list in route.ts or set GEMINI_OCR_MODEL.";
 
 /** Prefer GOOGLE_GEMINI_API_KEY; common alternates from Google docs / samples. */
 function resolveGeminiApiKey(): string | undefined {
